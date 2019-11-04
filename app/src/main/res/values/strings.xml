@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BucketList</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_films">Films</string>
+    <string name="title_books">Books</string>
+    <string name="title_games">Games</string>
 </resources>

@@ -13,13 +13,19 @@
 
     <fragment
         android:id="@+id/navigation_films"
-        android:name="com.example.bucketlist.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.bucketlist.ui.films.FilmsFragment"
+        android:label="@string/title_films"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_books"
-        android:name="com.example.bucketlist.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.example.bucketlist.ui.books.BooksFragment"
+        android:label="@string/title_books"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_games"
+        android:name="com.example.bucketlist.ui.games.GamesFragment"
+        android:label="@string/title_games"
+        tools:layout="@layout/fragment_games" />
 </navigation>

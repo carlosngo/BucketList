@@ -1,16 +1,16 @@
-package com.example.bucketlist.ui.dashboard;
+package com.example.bucketlist.ui.games;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class GamesViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public GamesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is games fragment");
     }
 
     public LiveData<String> getText() {
