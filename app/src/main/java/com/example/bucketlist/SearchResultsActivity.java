@@ -13,6 +13,7 @@ import android.widget.Toast;
 public class SearchResultsActivity extends AppCompatActivity {
 
     LinearLayout listLayout;
+    Note[] results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         listLayout = findViewById(R.id.listLayout);
-//        for(every search item){
-//            displayResults(name, category);
-//        }
+        for(Note n : results){
+            displayResults(n.getName(), n.getCategory());
+        }
     }
 
     public void displayResults(String name, String category){
