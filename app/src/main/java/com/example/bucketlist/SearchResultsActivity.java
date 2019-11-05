@@ -10,10 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class SearchResultsActivity extends AppCompatActivity {
 
     LinearLayout listLayout;
-    Note[] results;
+
+    ArrayList<Note> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
