@@ -1,8 +1,7 @@
 package com.example.bucketlist;
 
 public class Note {
-    String name;
-    String category;
+    String name, category;
 
     Note(String name, String category){
         this.name = name;

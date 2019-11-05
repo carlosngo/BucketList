@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class SearchResultsActivity extends AppCompatActivity {
 
     LinearLayout listLayout;
-
     ArrayList<Note> results;
 
     @Override
