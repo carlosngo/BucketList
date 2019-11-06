@@ -1,11 +1,13 @@
 package com.example.bucketlist.ui.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -15,7 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.bucketlist.MainActivity;
-import com.example.bucketlist.Note;
+import com.example.bucketlist.*;
 import com.example.bucketlist.R;
 
 import java.util.ArrayList;
@@ -45,35 +47,44 @@ public class HomeFragment extends Fragment {
     }
 
     public void displayItems(LinearLayout linearLayout, ArrayList<Note> notes){
-    listLayout = root.findViewById(R.id.listLayout);
-    for(Note n : notes){
-        newLayout = new LinearLayout(getContext());
-        newLayout.setOrientation(LinearLayout.HORIZONTAL);
-        newLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+//        for(Notes n : notes){
+        for(int i=0; i<3; i++){
+                newLayout = new LinearLayout(getContext());
+                newLayout.setOrientation(LinearLayout.VERTICAL);
+                newLayout.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                RelativeLayout.LayoutParams parameter = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                parameter.setMargins(30, 32, 10, 0); // left, top, right, bottom
+                newLayout.setLayoutParams(parameter);
 
-        final TextView nameField = new TextView(getContext());
-        nameField.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                final TextView nameField = new TextView(getContext());
+                nameField.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                nameField.setTextSize(20);
+                nameField.setTextColor(Color.parseColor("#000000"));
 
-        final TextView catField = new TextView(getContext());
-        catField.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+                final TextView catField = new TextView(getContext());
+                catField.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+                catField.setTextColor(Color.parseColor("#7f7f7f"));
+                catField.setTextSize(14);
 
-        nameField.setText(n.getName());
-        catField.setText(n.getCategory());
+//            nameField.setText(n.getName());
+//            catField.setText(n.getCategory());
 
-        nameField.setText("The Sound of Insects");
-        catField.setText("Film");
+                nameField.setText("Film"+i);
+                catField.setText("FILM");
 
-        newLayout.addView(nameField);
-        newLayout.addView(catField);
+                newLayout.addView(nameField);
+                newLayout.addView(catField);
 
-        listLayout.addView(newLayout);
-    }
-
+                linearLayout.addView(newLayout);
+            }
+        }
     }
 }
