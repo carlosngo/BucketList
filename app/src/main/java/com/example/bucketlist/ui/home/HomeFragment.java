@@ -59,6 +59,12 @@ public class HomeFragment extends Fragment {
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
                 parameter.setMargins(30, 32, 10, 0); // left, top, right, bottom
                 newLayout.setLayoutParams(parameter);
+                newLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // go to details page of selected item
+                    }
+                });
 
                 final TextView nameField = new TextView(getContext());
                 nameField.setLayoutParams(new ViewGroup.LayoutParams(
@@ -84,7 +90,7 @@ public class HomeFragment extends Fragment {
                 newLayout.addView(catField);
 
                 linearLayout.addView(newLayout);
-            }
+
         }
     }
 }

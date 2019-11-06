@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,18 +42,34 @@ public class SearchResultsActivity extends AppCompatActivity {
         newLayout.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
+        RelativeLayout.LayoutParams parameter = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        parameter.setMargins(30, 32, 10, 0); // left, top, right, bottom
+        newLayout.setLayoutParams(parameter);
+        newLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // go to details page of selected item
+            }
+        });
 
         final TextView nameField = new TextView(this);
         nameField.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         nameField.setText(name);
+        nameField.setTextSize(20);
+        nameField.setTextColor(Color.parseColor("#000000"));
 
         final TextView catField = new TextView(this);
         catField.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         catField.setText(category);
+        catField.setTextColor(Color.parseColor("#7f7f7f"));
+        catField.setTextSize(14);
+
 
         newLayout.addView(nameField);
         newLayout.addView(catField);
