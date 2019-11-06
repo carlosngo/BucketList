@@ -22,6 +22,7 @@
                 android:layout_height="match_parent"
                 android:text="Name"/>
             <EditText
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter name of film, book, or game"/>
@@ -65,11 +66,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:gravity="right">
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CANCEL"/>
+<!--            <Button-->
+<!--                android:id="@+id/backBtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="CANCEL"/>-->
             <Button
                 android:id="@+id/addBtn"
                 android:layout_width="wrap_content"
