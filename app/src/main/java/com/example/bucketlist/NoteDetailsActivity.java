@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class NoteDetailsActivity extends AppCompatActivity {
@@ -40,10 +42,20 @@ public class NoteDetailsActivity extends AppCompatActivity {
     }
 
     public void add(View v){
-        // add note to person's bucket list db
+        // add note to person's bucket list db lines here then return to home screen
+
+        Toast.makeText(this,
+                "Successfully added to bucket list.", Toast.LENGTH_SHORT).show();
+        setResult(0);
+        finish();
     }
 
     public void remove(View v){
-        // remove note from person's bucket list db
+        // remove note from person's bucket list db lines here then return to home screen
+
+        Toast.makeText(this,
+                "Successfully removed from bucket list.", Toast.LENGTH_SHORT).show();
+        setResult(1);
+        finish();
     }
 }

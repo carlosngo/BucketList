@@ -43,6 +43,7 @@
             android:textSize="18dp"
             android:textAlignment="center"
             android:text="I CAN'T FIND WHAT I'M LOOKING FOR"
+            android:onClick="manualAdd"
             android:textColor="@android:color/white"
             android:background="@drawable/button_bg_rounded_corners"/>
     </LinearLayout>

@@ -29,18 +29,24 @@ public class ManualAddActivity extends AppCompatActivity {
                 int selectedId = categoryChoices.getCheckedRadioButtonId();
                 selectedCategory = (RadioButton) findViewById(selectedId);
                 Toast.makeText(ManualAddActivity.this,
-                        selectedCategory.getText() + name.getText().toString(), Toast.LENGTH_SHORT).show();
-
-                // add new Note object into db
+                        "Successfully added " +name.getText().toString()+" ("+selectedCategory.getText()+")"+
+                                " to bucket list.", Toast.LENGTH_SHORT).show();
                 String nameInput = name.getText().toString();
                 String category = selectedCategory.getText().toString();
+
+
+                // add new Note object into db lines here
+
+                setResult(0);
+                finish();
             }
         });
 
 //        backBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onClick(View v) {
-//                // go back to search screen
+//            public void onClick(View v) { go back to search screen
+//                setResult(2);
+//                finish();
 //            }
 //        });
     }
