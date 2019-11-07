@@ -11,10 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class NoteDetailsActivity extends AppCompatActivity {
-
     TextView name, descrription;
     ArrayList<String> details;
-    Button deleteBtn;
+    Button addBtn, deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +23,27 @@ public class NoteDetailsActivity extends AppCompatActivity {
         descrription = (TextView) findViewById(R.id.description);
         Intent intent = getIntent();
         details = intent.getStringArrayListExtra("NOTE_DETAILS");
-        displayDetails(details);
+        addBtn = (Button) findViewById(R.id.addBtn);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        displayDetails(details);    //pass in details into this method to display Note details
+
     }
 
     public void displayDetails(ArrayList<String> details){
-        name.setText(details.get(0));
-        descrription.setText(details.get(1));
+        name.setText(details.get(0)); //display name
+        descrription.setText(details.get(1)); //display description like producer or smtg
+        if(Boolean.parseBoolean(details.get(2))==false){ //if not added in the db yet, hide remove button and show add button
+            deleteBtn.setVisibility(View.GONE);
+        } else {
+            addBtn.setVisibility(View.GONE);
+        }
     }
 
     public void add(View v){
-
+        // add note to person's bucket list db
     }
 
     public void remove(View v){
-
+        // remove note from person's bucket list db
     }
 }
