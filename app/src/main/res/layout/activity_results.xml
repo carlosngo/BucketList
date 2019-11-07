@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="10dp">
 
         <TextView
@@ -37,9 +37,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:textSize="18dp"
             android:textAlignment="center"
             android:text="I CAN'T FIND WHAT I'M LOOKING FOR"
-            android:layout_alignParentBottom="true"/>
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_bg_rounded_corners"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,16 +44,25 @@
                 android:id="@+id/addBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="3dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="ADD TO MY BUCKET LIST!"/>
+                android:text="ADD TO MY BUCKET LIST!"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_green_rounded_corners"
+                android:onClick="add"/>
+
             <Button
                 android:id="@+id/deleteBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="3dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="REMOVE FROM MY BUCKET LIST!"/>
+                android:text="REMOVE FROM MY BUCKET LIST"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_red_rounded_corners"
+                android:onClick="remove"/>
         </LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
