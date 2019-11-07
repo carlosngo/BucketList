@@ -26,13 +26,14 @@ public class ManualAddActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // get selected radio button from radioGroup
                 int selectedId = categoryChoices.getCheckedRadioButtonId();
                 selectedCategory = (RadioButton) findViewById(selectedId);
-
                 Toast.makeText(ManualAddActivity.this,
                         selectedCategory.getText() + name.getText().toString(), Toast.LENGTH_SHORT).show();
-                // add new Note object into DB
+
+                // add new Note object into db
+                String nameInput = name.getText().toString();
+                String category = selectedCategory.getText().toString();
             }
         });
 
