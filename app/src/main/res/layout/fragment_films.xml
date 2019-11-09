@@ -21,7 +21,7 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="48dp"
         android:layout_marginLeft="10dp">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:id="@+id/listLayout"
             android:orientation="vertical"
             android:padding="10dip"

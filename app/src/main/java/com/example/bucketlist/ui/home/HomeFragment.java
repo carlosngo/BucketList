@@ -80,11 +80,12 @@ public class HomeFragment extends Fragment {
                 catField.setTextColor(Color.parseColor("#7f7f7f"));
                 catField.setTextSize(14);
 
+            // sample data to show ui
+                nameField.setText("Note"+i);
+                catField.setText("item");
+
 //            nameField.setText(n.getName());
 //            catField.setText(n.getCategory());
-
-                nameField.setText("Film"+i);
-                catField.setText("FILM");
 
                 newLayout.addView(nameField);
                 newLayout.addView(catField);
@@ -92,5 +93,7 @@ public class HomeFragment extends Fragment {
                 linearLayout.addView(newLayout);
 
         }
+
+
     }
 }

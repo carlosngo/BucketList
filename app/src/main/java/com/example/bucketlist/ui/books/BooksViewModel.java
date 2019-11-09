@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 public class BooksViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
+    BooksFragment booksFragment;
 
     public BooksViewModel() {
         mText = new MutableLiveData<>();

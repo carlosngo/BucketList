@@ -15,7 +15,7 @@ public class ManualAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_manual_add);
 
         categoryChoices = (RadioGroup) findViewById(R.id.categoryChoices);
         addBtn = (Button) findViewById(R.id.addBtn);
