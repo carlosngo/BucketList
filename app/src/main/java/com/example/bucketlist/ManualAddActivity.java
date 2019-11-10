@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.google.firebase.storage.StorageReference;
+
 public class ManualAddActivity extends AppCompatActivity {
     private RadioGroup categoryChoices;
     private RadioButton selectedCategory;
     private Button addBtn, backBtn;
     private EditText name;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
