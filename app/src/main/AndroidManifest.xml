@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RegistrationActivity"></activity>
-        <activity android:name=".LogInActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+        <activity android:name=".LandingActivity" />
         <activity android:name=".ManualAddActivity" />
         <activity android:name=".NoteDetailsActivity" />
         <activity android:name=".SearchResultsActivity">
