@@ -46,9 +46,12 @@ public class RegistrationActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.length()==0 || password.length()==0){
-                    registerAccount();
-                }
+            if(username.length()==0 || password.length()==0){
+                Toast.makeText(RegistrationActivity.this,
+                        "Please fill in all fields first.", Toast.LENGTH_SHORT).show();
+            } else {
+                registerAccount();
+            }
             }
         });
     }

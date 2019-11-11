@@ -37,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(MainActivity.this, LandingActivity.class);
                     startActivity(intent);
-                }
-                else
-                {
+                } else if(username.length()==0 || password.length()==0){
+                    Toast.makeText(MainActivity.this,
+                            "Please fill in all fields first.", Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(getApplicationContext(),"Username and Password combination is invalid",Toast.LENGTH_SHORT).show();
                 }
             }
