@@ -47,6 +47,8 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 emailAddress = email.getText().toString();
                 password = pwd.getText().toString();
+                email.setText("");
+                pwd.setText("");
                 if(emailAddress.length()==0 || password.length()==0){
                     Toast.makeText(RegistrationActivity.this,
                             "Please fill in all fields first.", Toast.LENGTH_SHORT).show();
