@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button registerBtn;
     Intent intent;
     FirebaseAuth mAuth;
-    ProgressBar progressBar;
+    FrameLayout progressOverlay;
     String emailAddress, password;
 
     @Override
@@ -38,8 +39,8 @@ public class RegistrationActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.txtName);
         pwd = (EditText)findViewById(R.id.txtPwd);
         registerBtn = (Button)findViewById(R.id.btnRegister);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
-        progressBar.setVisibility(View.INVISIBLE);
+        progressOverlay = (FrameLayout) findViewById(R.id.progress_overlay);
+        progressOverlay.setVisibility(View.INVISIBLE);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +60,20 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-
-        if(mAuth.getCurrentUser() != null){
-            Toast.makeText(RegistrationActivity.this,
-                    "Welcome" + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
-            startActivity(intent);
-        }
-    }
+//    @Override
+//    protected void onStart(){
+//        super.onStart();
+//
+//        if(mAuth.getCurrentUser() != null){
+//            Toast.makeText(RegistrationActivity.this,
+//                    "Welcome" + mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
+//            startActivity(intent);
+//        }
+//    }
 
     public void registerAccount(){
-        progressBar.setVisibility(View.VISIBLE);
+        progressOverlay.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(emailAddress, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -86,22 +87,22 @@ public class RegistrationActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        progressBar.setVisibility(View.INVISIBLE);
+                                        progressOverlay.setVisibility(View.INVISIBLE);
                                         Toast.makeText(getApplicationContext(),"Registration Successful.",Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
                                         startActivity(intent);
                                     } else {
-                                        if(task.getException() instanceof FirebaseAuthUserCollisionException){progressBar.setVisibility(View.INVISIBLE);
+                                        progressOverlay.setVisibility(View.INVISIBLE);
+                                        if(task.getException() instanceof FirebaseAuthUserCollisionException){
                                             Toast.makeText(getApplicationContext(),"You are already registered.",Toast.LENGTH_SHORT).show();
                                         }else{
-                                            progressBar.setVisibility(View.INVISIBLE);
                                             Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }
                             });
                         } else{
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressOverlay.setVisibility(View.INVISIBLE);
                             Toast.makeText(getApplicationContext(),"Failed to register account."+task.getException(),Toast.LENGTH_SHORT).show();
                         }
                     }
