@@ -9,7 +9,7 @@ import android.widget.*;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    EditText uname, pwd;
+    EditText email, pwd;
     Button loginBtn, registerBtn;
     Intent intent;
     private FirebaseAuth mAuth;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        uname = (EditText)findViewById(R.id.txtName);
+        email = (EditText)findViewById(R.id.txtName);
         pwd = (EditText)findViewById(R.id.txtPwd);
         loginBtn = (Button)findViewById(R.id.btnLogin);
         registerBtn = (Button)findViewById(R.id.btnRegister);
@@ -27,17 +27,17 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = uname.getText().toString();
+                String emailAddress = email.getText().toString();
                 String password = pwd.getText().toString();
-                if(username.equals("user") && password.equals("pw")){
-                    uname.setText("");
+                if(emailAddress.equals("user") && password.equals("pw")){
+                    email.setText("");
                     pwd.setText("");
 
                     Toast.makeText(getApplicationContext(),"Log In Successful",Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(MainActivity.this, LandingActivity.class);
                     startActivity(intent);
-                } else if(username.length()==0 || password.length()==0){
+                } else if(emailAddress.length()==0 || password.length()==0){
                     Toast.makeText(MainActivity.this,
                             "Please fill in all fields first.", Toast.LENGTH_SHORT).show();
                 } else {

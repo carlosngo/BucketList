@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="left"
-            android:text="Username"
+            android:text="Email"
             android:textColor="#FFFFFF" />
 
         <EditText

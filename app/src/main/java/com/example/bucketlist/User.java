@@ -4,26 +4,26 @@ import java.util.ArrayList;
 
 public class User {
 
-    private String username, password;
+    private String email, password;
     private ArrayList<Note> notes;
 
-    public User(String username, String password, ArrayList<Note> notes){
-        this.username = username;
+    public User(String email, String password, ArrayList<Note> notes){
+        this.email = email;
         this.password = password;
         this.notes = notes;
     }
 
-    public User(String username, String password){
-        this.username = username;
+    public User(String email, String password){
+        this.email = email;
         this.password = password;
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 
     public String getPassword() {
