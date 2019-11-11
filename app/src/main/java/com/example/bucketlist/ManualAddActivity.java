@@ -31,17 +31,21 @@ public class ManualAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int selectedId = categoryChoices.getCheckedRadioButtonId();
                 selectedCategory = (RadioButton) findViewById(selectedId);
-                Toast.makeText(ManualAddActivity.this,
-                        "Successfully added " +name.getText().toString()+" ("+selectedCategory.getText()+")"+
-                                " to bucket list.", Toast.LENGTH_SHORT).show();
                 String nameInput = name.getText().toString();
                 String category = selectedCategory.getText().toString();
 
+                if(nameInput.length()==0 || category.length()==0){
+                    Toast.makeText(ManualAddActivity.this,
+                            "Please fill in all fields first.", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(ManualAddActivity.this,
+                            "Successfully added " +name.getText().toString()+" ("+selectedCategory.getText()+")"+
+                                    " to bucket list.", Toast.LENGTH_SHORT).show();
+                    // add new Note object into db lines here
 
-                // add new Note object into db lines here
-
-                setResult(0);
-                finish();
+                    setResult(0);
+                    finish();
+                }
             }
         });
 
