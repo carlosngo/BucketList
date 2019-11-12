@@ -41,8 +41,7 @@
                     android:id="@+id/films"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/radio_films"
-                    android:checked="true" />
+                    android:text="@string/radio_films" />
 
                 <RadioButton
                     android:id="@+id/books"
@@ -79,6 +78,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="ADD TO MY BUCKET LIST!"
                 android:textColor="@android:color/white"
+                android:padding="3dp"
                 android:background="@drawable/button_green_rounded_corners"/>
         </LinearLayout>
 
