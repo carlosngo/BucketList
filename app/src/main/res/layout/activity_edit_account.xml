@@ -39,7 +39,7 @@
 
         <Button
             android:id="@+id/editEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginTop="25dp"
@@ -67,7 +67,7 @@
 
         <Button
             android:id="@+id/editPw"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="8dp"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:text="Back"
             android:onClick="back"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:textColor="#FFFFFF"
             android:background="@drawable/cancel_button" />
 

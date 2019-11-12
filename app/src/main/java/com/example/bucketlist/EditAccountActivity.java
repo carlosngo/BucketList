@@ -26,9 +26,9 @@ public class EditAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_account);
 
         mAuth = FirebaseAuth.getInstance();
-        email = (TextView) findViewById(R.id.txtName);
+        //email = (TextView) findViewById(R.id.txtName);
         //pwd = (EditText)findViewById(R.id.txtPwd);
-        email.setText(mAuth.getCurrentUser().getEmail());
+        //email.setText(mAuth.getCurrentUser().getEmail());
         //pwd.setText("*****");
         editEmail = (Button)findViewById(R.id.editEmail);
         editPw = (Button)findViewById(R.id.editPw);
