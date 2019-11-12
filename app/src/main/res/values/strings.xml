@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">BucketList</string>
+
     <string name="title_home">Home</string>
     <string name="title_films">Films</string>
     <string name="title_books">Books</string>
     <string name="title_games">Games</string>
     <string name="title_series">Series</string>
     <string name="title_goals">Others</string>
+
     <string name="action_search">Search</string>
     <string name="action_logout">Log Out</string>
     <string name="action_account">Edit Account</string>
@@ -15,6 +17,9 @@
     <string name="radio_films">Films</string>
     <string name="radio_books">Books</string>
     <string name="radio_games">Games</string>
+    <string name="radio_series">Series</string>
+    <string name="radio_goals">Others</string>
+
     <string name="title_activity_login">Log in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
