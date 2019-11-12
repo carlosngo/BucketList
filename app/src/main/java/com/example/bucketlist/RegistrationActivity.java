@@ -91,14 +91,15 @@ public class RegistrationActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
                                         progressOverlay.setVisibility(View.INVISIBLE);
                                         Toast.makeText(getApplicationContext(),"Registration Successful.",Toast.LENGTH_SHORT).show();
+                                        finish();
                                         Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
                                         startActivity(intent);
                                     } else {
                                         progressOverlay.setVisibility(View.INVISIBLE);
                                         if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                            Toast.makeText(getApplicationContext(),"You are already registered.",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"This email is already registered.",Toast.LENGTH_SHORT).show();
                                         }else{
-                                            Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
