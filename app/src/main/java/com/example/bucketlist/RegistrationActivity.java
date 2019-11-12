@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText email, pwd;
-    Button registerBtn;
+    Button registerBtn, backbtn;
     Intent intent;
     FirebaseAuth mAuth;
     FrameLayout progressOverlay;
@@ -39,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.txtName);
         pwd = (EditText)findViewById(R.id.txtPwd);
         registerBtn = (Button)findViewById(R.id.btnRegister);
+        backbtn = (Button)findViewById(R.id.backBtn);
         progressOverlay = (FrameLayout) findViewById(R.id.progress_overlay);
         progressOverlay.setVisibility(View.INVISIBLE);
 

@@ -55,15 +55,30 @@
             android:ems="10"
             android:inputType="textPassword"
             android:background="#FFFFFF"/>
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="right"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_lavender_rounded_corners" />
+            android:orientation="horizontal"
+            android:gravity="right">
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_marginTop="20dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/cancel_button" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_lavender_rounded_corners" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
