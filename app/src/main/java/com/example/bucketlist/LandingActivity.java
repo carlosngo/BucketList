@@ -86,6 +86,10 @@ public class LandingActivity extends AppCompatActivity {
             startActivity(new Intent(LandingActivity.this, MainActivity.class));
             return true;
         }
+        else if(id == R.id.account) {
+            startActivity(new Intent(LandingActivity.this, PasswordConfirmationActivity.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

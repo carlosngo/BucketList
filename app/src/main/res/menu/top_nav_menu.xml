@@ -16,4 +16,9 @@
         android:icon="@drawable/log_out"
         android:title="@string/action_logout"
         />
+
+    <item
+        android:id="@+id/account"
+        android:title="@string/action_account"
+        />
 </menu>

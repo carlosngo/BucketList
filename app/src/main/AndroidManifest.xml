@@ -9,16 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".LandingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ManualAddActivity"
+        <activity android:name=".EditPasswordActivity"></activity>
+        <activity android:name=".EditEmailActivity" />
+        <activity android:name=".PasswordConfirmationActivity" />
+        <activity android:name=".EditAccountActivity" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LandingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ManualAddActivity"
             android:label="Add Note"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".NoteDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SearchResultsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NoteDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SearchResultsActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

@@ -6,6 +6,7 @@
     <string name="title_games">Games</string>
     <string name="action_search">Search</string>
     <string name="action_logout">Log Out</string>
+    <string name="action_account">Edit Account</string>
     <string name="search_hint">Search films, books, and games</string>
 
 
