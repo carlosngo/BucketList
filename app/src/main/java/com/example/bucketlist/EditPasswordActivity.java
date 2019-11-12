@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +19,7 @@ public class EditPasswordActivity extends AppCompatActivity {
     Button cancel, save;
     EditText passwordInput;
     FirebaseAuth mAuth;
+    FrameLayout progressOverlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +30,29 @@ public class EditPasswordActivity extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.backBtn);
         save = (Button) findViewById(R.id.saveBtn);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
+        progressOverlay = (FrameLayout) findViewById(R.id.progress_overlay);
     }
 
 
     public void save(View v){
         String pw = passwordInput.getText().toString();
-        mAuth.getCurrentUser().updatePassword(pw).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-            if (task.isSuccessful()) {
-                Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(getApplicationContext(), "Update Failed.", Toast.LENGTH_SHORT).show();
-            }
-            }
-        });
+        if(pw.length()>=6){
+            progressOverlay.setVisibility(View.VISIBLE);
+            mAuth.getCurrentUser().updatePassword(pw).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    progressOverlay.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Update Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else{
+            Toast.makeText(getApplicationContext(), "Password should be at least 6 characters.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void cancel(View v){

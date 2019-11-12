@@ -9,10 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
-        android:gravity="left"
+        android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="100dp">
 
@@ -20,77 +19,91 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Account"
-            android:layout_gravity="left"
             android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/fstTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="left"
-            android:text="Email" />
+<!--        <TextView-->
+<!--            android:id="@+id/fstTxt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:text="Current Email" />-->
 
-        <EditText
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:ems="10"-->
+<!--            android:text="sample@gmail.com"/>-->
 
         <Button
             android:id="@+id/editEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Edit"
+            android:padding="8dp"
+            android:layout_marginTop="25dp"
+            android:text="Edit Email"
             android:onClick="editEmail"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_light_green_rounded_corners" />
+            android:background="@drawable/button_lavender_rounded_corners" />
 
-        <TextView
-            android:id="@+id/secTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="25dp"
-            android:text="Password" />
+<!--        <TextView-->
+<!--            android:id="@+id/secTxt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="left"-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:text="Password" />-->
 
 
 
-        <EditText
-            android:id="@+id/txtPwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+<!--        <EditText-->
+<!--            android:id="@+id/txtPwd"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textPassword" />-->
 
         <Button
             android:id="@+id/editPw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Edit"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:text="Edit Password"
             android:onClick="editPw"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_light_green_rounded_corners" />
+            android:background="@drawable/button_lavender_rounded_corners" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="55dp"
-            android:orientation="horizontal"
-            android:gravity="right">
+            android:text="Back"
+            android:onClick="back"
+            android:layout_marginTop="60dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/cancel_button" />
 
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:onClick="back"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/cancel_button" />
-        </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:layout_marginTop="55dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="right">-->
+
+<!--            <Button-->
+<!--                android:id="@+id/backBtn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Back"-->
+<!--                android:onClick="back"-->
+<!--                android:textColor="#FFFFFF"-->
+<!--                android:background="@drawable/cancel_button" />-->
+<!--        </LinearLayout>-->
     </LinearLayout>
     <FrameLayout
         android:id="@+id/progress_overlay"

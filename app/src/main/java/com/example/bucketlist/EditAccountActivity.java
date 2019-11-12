@@ -8,15 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class EditAccountActivity extends AppCompatActivity {
-    EditText email, pwd;
+    EditText pwd;
+    TextView email;
     Button editEmail, editPw, backBtn;
     Intent intent;
-    FrameLayout progressOverlay;
     private FirebaseAuth mAuth;
 
     @Override
@@ -25,14 +26,13 @@ public class EditAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_account);
 
         mAuth = FirebaseAuth.getInstance();
-        email = (EditText)findViewById(R.id.txtName);
-        pwd = (EditText)findViewById(R.id.txtPwd);
+        email = (TextView) findViewById(R.id.txtName);
+        //pwd = (EditText)findViewById(R.id.txtPwd);
         email.setText(mAuth.getCurrentUser().getEmail());
-        pwd.setText("*****");
+        //pwd.setText("*****");
         editEmail = (Button)findViewById(R.id.editEmail);
         editPw = (Button)findViewById(R.id.editPw);
         backBtn = (Button)findViewById(R.id.backBtn);
-        progressOverlay = (FrameLayout) findViewById(R.id.progress_overlay);
 
     }
 
