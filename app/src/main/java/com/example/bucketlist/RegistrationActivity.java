@@ -63,6 +63,10 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    public void back(View v){
+        finish();
+    }
+
 //    @Override
 //    protected void onStart(){
 //        super.onStart();
@@ -106,7 +110,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             });
                         } else{
                             progressOverlay.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(),"Failed to register account."+task.getException(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Failed to register account.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

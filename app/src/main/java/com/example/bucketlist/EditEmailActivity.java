@@ -39,10 +39,10 @@ public class EditEmailActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Update Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Update Failed"+task.getException(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Update Failed.", Toast.LENGTH_SHORT).show();
                     }
 
                 }

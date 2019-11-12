@@ -35,21 +35,26 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressOverlay.setVisibility(View.VISIBLE);
                 emailAddress = email.getText().toString();
                 password = pwd.getText().toString();
-                mAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressOverlay.setVisibility(View.GONE);
-                        if(task.isSuccessful()){
-                            startActivity(new Intent(MainActivity.this, LandingActivity.class));
+                if(emailAddress.length()>0 && password.length()>0){
+                    progressOverlay.setVisibility(View.VISIBLE);
+                    mAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressOverlay.setVisibility(View.GONE);
+                            if(task.isSuccessful()){
+                                startActivity(new Intent(MainActivity.this, LandingActivity.class));
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"Invalid email or password.",Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(getApplicationContext(),""+task.getException(),Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    });
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Please fill up all fields.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
