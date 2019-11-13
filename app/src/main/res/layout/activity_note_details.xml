@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="20dp">
             <TextView
                 android:id="@+id/name"
@@ -26,7 +26,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
-                android:text="Film by Robert:"/>
+                android:text="Film by Robert:"
+                android:layout_marginBottom="100dp"/>
+
+            <Button
+                android:id="@+id/addBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="ADD TO MY BUCKET LIST!"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_green_rounded_corners"
+                android:onClick="add"/>
+
+            <Button
+                android:id="@+id/editBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="EDIT"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_green_rounded_corners"
+                android:onClick="edit"/>
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="REMOVE FROM MY BUCKET LIST"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_red_rounded_corners"
+                android:onClick="remove"/>
+
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,29 +79,20 @@
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:text="BACK"/>-->
-            <Button
-                android:id="@+id/addBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="ADD TO MY BUCKET LIST!"
-                android:textColor="@android:color/white"
-                android:background="@drawable/button_green_rounded_corners"
-                android:onClick="add"/>
+
 
             <Button
-                android:id="@+id/deleteBtn"
+                android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="REMOVE FROM MY BUCKET LIST"
+                android:text="BACK"
                 android:textColor="@android:color/white"
-                android:background="@drawable/button_red_rounded_corners"
-                android:onClick="remove"/>
+                android:background="@drawable/cancel_button"
+                android:onClick="back"/>
+
         </LinearLayout>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

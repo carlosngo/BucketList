@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class NoteDetailsActivity extends AppCompatActivity {
     TextView name, descrription;
     ArrayList<String> details;
-    Button addBtn, deleteBtn;
+    Button addBtn, deleteBtn, editBtn, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,8 @@ public class NoteDetailsActivity extends AppCompatActivity {
         details = intent.getStringArrayListExtra("NOTE_DETAILS");
         addBtn = (Button) findViewById(R.id.addBtn);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        editBtn = (Button) findViewById(R.id.editBtn);
+        backBtn = (Button) findViewById(R.id.backBtn);
         displayDetails(details);    //pass in details into this method to display Note details
 
     }
@@ -36,6 +38,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         descrription.setText(details.get(1)); //display description like producer or smtg
         if(Boolean.parseBoolean(details.get(2))==false){ //if not added in the db yet, hide remove button and show add button
             deleteBtn.setVisibility(View.GONE);
+            editBtn.setVisibility(View.GONE);
         } else {
             addBtn.setVisibility(View.GONE);
         }
@@ -56,6 +59,14 @@ public class NoteDetailsActivity extends AppCompatActivity {
         Toast.makeText(this,
                 "Successfully removed from bucket list.", Toast.LENGTH_SHORT).show();
         setResult(1);
+        finish();
+    }
+
+    public void edit(View v){
+        startActivity(new Intent(NoteDetailsActivity.this, EditNoteActivity.class));
+    }
+
+    public void back(View v){
         finish();
     }
 }

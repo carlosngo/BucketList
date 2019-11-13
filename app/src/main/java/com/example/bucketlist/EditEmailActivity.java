@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class EditEmailActivity extends AppCompatActivity {
 
@@ -47,8 +48,11 @@ public class EditEmailActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Update Failed.", Toast.LENGTH_SHORT).show();
-                    }
+                        if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                            Toast.makeText(getApplicationContext(),"This email is already in use.",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Update Failed.",Toast.LENGTH_SHORT).show();
+                        }                    }
 
                 }
             });
