@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.bucketlist.*;
 import com.example.bucketlist.R;
+import com.example.bucketlist.model.Book;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     View root;
     LinearLayout listLayout, newLayout;
-    ArrayList<Note> notes;
+    ArrayList<Book> categories;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,12 +40,12 @@ public class HomeFragment extends Fragment {
             }
         });
         listLayout = root.findViewById(R.id.listLayout);
-        displayItems(listLayout, notes);
+        displayItems(listLayout, categories);
         return root;
     }
 
-    public void displayItems(LinearLayout linearLayout, ArrayList<Note> notes){
-//        for(Notes n : notes){
+    public void displayItems(LinearLayout linearLayout, ArrayList<Book> categories){
+//        for(Notes n : categories){
         for(int i=0; i<3; i++){
                 newLayout = new LinearLayout(getContext());
                 newLayout.setOrientation(LinearLayout.VERTICAL);
@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
                 catField.setTextSize(14);
 
             // sample data to show ui
-                nameField.setText("Note"+i);
+                nameField.setText("Book"+i);
                 catField.setText("item");
 
 //            nameField.setText(n.getName());

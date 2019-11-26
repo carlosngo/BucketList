@@ -1,6 +1,6 @@
-package com.example.bucketlist.data;
+package com.example.bucketlist.dao;
 
-import com.example.bucketlist.data.model.LoggedInUser;
+import com.example.bucketlist.model.LoggedInUser;
 
 import java.io.IOException;
 

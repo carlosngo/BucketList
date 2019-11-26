@@ -3,10 +3,9 @@ package com.example.bucketlist;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.transition.Visibility;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RemoteViews;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +15,8 @@ public class NoteDetailsActivity extends AppCompatActivity {
     TextView name, descrription;
     ArrayList<String> details;
     Button addBtn, deleteBtn, editBtn, backBtn;
+    FrameLayout progressOverlay;
+    String nam, cat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +25,16 @@ public class NoteDetailsActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         descrription = (TextView) findViewById(R.id.description);
         Intent intent = getIntent();
+        nam = intent.getStringExtra("ACTION_NAME");
+        cat = intent.getStringExtra("ACTION_CATEGORY");
         details = intent.getStringArrayListExtra("NOTE_DETAILS");
         addBtn = (Button) findViewById(R.id.addBtn);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
         editBtn = (Button) findViewById(R.id.editBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
-        displayDetails(details);    //pass in details into this method to display Note details
+        progressOverlay = (FrameLayout) findViewById(R.id.progress_overlay);
+        progressOverlay.setVisibility(View.INVISIBLE);
+        displayDetails(details);    //pass in details into this method to display Book details
 
     }
 
@@ -46,6 +51,9 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     public void add(View v){
         // add note to person's bucket list db lines here then return to home screen
+        progressOverlay.setVisibility(View.VISIBLE);
+
+
 
         Toast.makeText(this,
                 "Successfully added to bucket list.", Toast.LENGTH_SHORT).show();

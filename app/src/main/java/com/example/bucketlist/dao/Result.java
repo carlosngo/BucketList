@@ -1,4 +1,4 @@
-package com.example.bucketlist.data;
+package com.example.bucketlist.dao;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

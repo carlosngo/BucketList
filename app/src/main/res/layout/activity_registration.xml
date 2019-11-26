@@ -67,6 +67,7 @@
                 android:text="Cancel"
                 android:onClick="back"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="7dp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/cancel_button" />
 
@@ -76,7 +77,6 @@
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button_lavender_rounded_corners" />
         </LinearLayout>

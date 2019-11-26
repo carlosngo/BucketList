@@ -19,9 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.bucketlist.ManualAddActivity;
-import com.example.bucketlist.Note;
+import com.example.bucketlist.model.Book;
 import com.example.bucketlist.R;
-import com.example.bucketlist.ui.games.GamesViewModel;
 
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class GoalsFragment extends Fragment {
     private GoalsViewModel mViewModel;
     View root;
     LinearLayout listLayout, newLayout;
-    ArrayList<Note> notes;
+    ArrayList<Book> categories;
 
     public static GoalsFragment newInstance() {
         return new GoalsFragment();
@@ -52,12 +51,12 @@ public class GoalsFragment extends Fragment {
             }
         });
         listLayout = root.findViewById(R.id.listLayout);
-        displayItems(notes);
+        displayItems(categories);
         return root;
     }
 
-    public void displayItems(ArrayList<Note> notes){
-//        for(Notes n : notes){
+    public void displayItems(ArrayList<Book> categories){
+//        for(Notes n : categories){
         for(int i=0; i<3; i++){
             newLayout = new LinearLayout(getContext());
             newLayout.setOrientation(LinearLayout.VERTICAL);

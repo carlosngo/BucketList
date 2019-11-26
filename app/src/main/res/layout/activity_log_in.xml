@@ -62,14 +62,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="7dp"
                 android:text="Sign Up"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button_lavender_rounded_corners" />
@@ -78,8 +79,6 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="3dp"
                 android:text="Log In"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button_light_green_rounded_corners" />

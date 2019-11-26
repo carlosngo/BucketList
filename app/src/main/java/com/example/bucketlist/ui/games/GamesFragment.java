@@ -15,9 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.bucketlist.Note;
+import com.example.bucketlist.model.Book;
 import com.example.bucketlist.R;
-import com.example.bucketlist.ui.home.HomeViewModel;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,7 @@ public class GamesFragment extends Fragment {
     private GamesViewModel gamesViewModel;
     View root;
     LinearLayout listLayout, newLayout;
-    ArrayList<Note> notes;
+    ArrayList<Book> categories;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +41,12 @@ public class GamesFragment extends Fragment {
             }
         });
         listLayout = root.findViewById(R.id.listLayout);
-        displayItems(notes);
+        displayItems(categories);
         return root;
     }
 
-    public void displayItems(ArrayList<Note> notes){
-//        for(Notes n : notes){
+    public void displayItems(ArrayList<Book> categories){
+//        for(Notes n : categories){
         for(int i=0; i<3; i++){
             newLayout = new LinearLayout(getContext());
             newLayout.setOrientation(LinearLayout.VERTICAL);

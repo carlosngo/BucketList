@@ -1,0 +1,47 @@
+package com.example.bucketlist.model;
+
+import com.google.firebase.database.IgnoreExtraProperties;
+
+@IgnoreExtraProperties
+public class Book extends Model{
+    private Metadata data;
+
+    public Book(){
+
+    }
+
+    public Book(String id, Metadata data){
+        super(id);
+        this.data = data;
+    }
+
+    public Metadata getData() {
+        return data;
+    }
+
+    //    public ArrayList<String> getOwnerList() {
+//        if (ownerList == null){
+//            ArrayList<String> aList = new ArrayList();
+//            try{
+//                aList.addAll(Arrays.asList(owners.split(",")));
+//            }catch(Exception e){}
+//            ownerList = aList;
+//            return aList;
+//        }else
+//            return ownerList;
+//    }
+//
+//    public void addOwners(String owner) {
+//        owners = owners + "," + owner;
+//    }
+//
+//    public void removeOwners(String owner){
+//        if(ownerList.size() > 1 && ownerList.indexOf(owner) > 0){
+//            String hold = "," + owner;
+//            owners = owners.replace(hold, "");
+//        }else{
+//            owners = owners.replace(owner, "");
+//        }
+//
+//    }
+}

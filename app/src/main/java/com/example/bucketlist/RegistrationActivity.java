@@ -9,17 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.bucketlist.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -110,7 +108,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             });
                         } else{
                             progressOverlay.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getApplicationContext(),"Failed to register account.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Failed to register account. Please enter a valid email address.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

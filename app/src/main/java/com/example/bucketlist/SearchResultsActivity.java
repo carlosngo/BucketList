@@ -14,12 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bucketlist.model.Book;
+
 import java.util.ArrayList;
 
 public class SearchResultsActivity extends AppCompatActivity {
 
     LinearLayout listLayout;
-    ArrayList<Note> results;
+    ArrayList<Book> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         }
 
         listLayout = findViewById(R.id.listLayout);
-//        for(Note n : results){
+//        for(Book n : results){
 //            displayResults(n.getName(), n.getCategory());
 //        }
 
@@ -84,6 +86,8 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public void displayResults(String name, String category){
+        final String hold = name;
+        final String cat = category;
         LinearLayout newLayout = new LinearLayout(this);
         newLayout.setOrientation(LinearLayout.HORIZONTAL);
         newLayout.setLayoutParams(new ViewGroup.LayoutParams(
@@ -97,7 +101,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         newLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // go to details page of selected item lines here
+                Intent intent = new Intent(SearchResultsActivity.this, NoteDetailsActivity.class);
+                intent.putExtra("ACTIVITY_NAME", hold);
+                intent.putExtra("ACTIVITY_CATEGORY", cat);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -136,7 +143,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 finish(); // done manual adding to db
             }
             else if(requestCode == 1){
-                finish(); // done removing a Note from db
+                finish(); // done removing a Book from db
             }
             else if(requestCode == 2){
                 // cancelled adding, if we are going to add that button

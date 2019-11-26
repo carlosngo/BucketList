@@ -43,7 +43,7 @@ public class ManualAddActivity extends AppCompatActivity {
                     Toast.makeText(ManualAddActivity.this,
                             "Successfully added " +name.getText().toString()+" ("+selectedCategory.getText()+")"+
                                     " to bucket list.", Toast.LENGTH_SHORT).show();
-                    // add new Note object into db lines here
+                    // add new Book object into db lines here
 
                     setResult(0);
                     finish();

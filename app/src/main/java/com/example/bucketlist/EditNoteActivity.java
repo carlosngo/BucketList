@@ -47,7 +47,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 } else{
                     Toast.makeText(EditNoteActivity.this,
                             "Successfully updated " +name.getText().toString()+" ("+selectedCategory.getText()+")", Toast.LENGTH_SHORT).show();
-                    // update Note object into db lines here
+                    // update Book object into db lines here
 
 
                     finish();
