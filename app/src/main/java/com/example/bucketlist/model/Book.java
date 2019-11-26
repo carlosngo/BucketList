@@ -4,19 +4,25 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Book extends Model{
-    private Metadata data;
+    private String title;
+    private String author;
 
     public Book(){
 
     }
 
-    public Book(String id, Metadata data){
+    public Book(String id, String title, String author){
         super(id);
-        this.data = data;
+        this.title = title;
+        this.author = author;
     }
 
-    public Metadata getData() {
-        return data;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     //    public ArrayList<String> getOwnerList() {

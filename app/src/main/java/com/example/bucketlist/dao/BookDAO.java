@@ -33,28 +33,28 @@ public class BookDAO implements DataAccessObject{
         DatabaseReference databaseBook = getBookReference();
         String id = databaseBook.push().getKey();
         book.setId(id);
-        databaseBook.child(id).setValue(book.getData().getId());
-        metadataDAO.add(book.getData());
+        databaseBook.child(id).setValue(book.getId());
+//        metadataDAO.add(book.getData());
         return id;
     }
 
     @Override
     public void delete(String id) {
         DatabaseReference databaseBook = getBookReference().child(id);
-        databaseBook.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                metaId = dataSnapshot.getKey();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        databaseBook.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                metaId = dataSnapshot.getKey();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         databaseBook.removeValue();
-        DatabaseReference databaseMetadata = getMetadataReference().child(metaId);
-        databaseMetadata.removeValue();
+//        DatabaseReference databaseMetadata = getMetadataReference().child(metaId);
+//        databaseMetadata.removeValue();
     }
 
     @Override
