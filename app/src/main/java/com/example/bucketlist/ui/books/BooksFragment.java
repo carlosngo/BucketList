@@ -97,13 +97,6 @@ public class BooksFragment extends Fragment {
         bookReference = bookDAO.getBookReference();
         books = new ArrayList<>();
 //        displayItems(categories);
-
-        return root;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         bookChangeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -121,10 +114,8 @@ public class BooksFragment extends Fragment {
             }
         };
         bookReference.addValueEventListener(bookChangeListener);
-
+        return root;
     }
-
-
 
     public void displayItems(ArrayList<Book> categories){
 //        for(Notes n : categories){

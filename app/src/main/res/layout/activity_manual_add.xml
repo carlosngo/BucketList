@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ManualAddActivity">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,12 +17,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Add A Note"
-                android:textSize="28dp"
-                android:layout_marginBottom="30dp"/>
+                android:layout_marginBottom="30dp"
+                android:text="Create Media"
+                android:textSize="28dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -50,12 +51,6 @@
                     android:text="@string/radio_films" />
 
                 <RadioButton
-                    android:id="@+id/series"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio_series" />
-
-                <RadioButton
                     android:id="@+id/books"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,6 +61,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_games" />
+
+                <RadioButton
+                    android:id="@+id/series"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_series" />
 
                 <RadioButton
                     android:id="@+id/goals"
