@@ -21,10 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucketlist.dao.BookDAO;
 import com.example.bucketlist.dao.Database;
-import com.example.bucketlist.dao.MetadataDAO;
 import com.example.bucketlist.model.Book;
 import com.example.bucketlist.R;
-import com.example.bucketlist.model.Metadata;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

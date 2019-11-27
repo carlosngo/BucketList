@@ -1,11 +1,11 @@
 package com.example.bucketlist.model;
 
-public class Metadata extends Model{
-    String title, author;
+public abstract class Media extends  Model{
+    private String title, author;
 
-    public Metadata(){}
+    public Media(){}
 
-    public Metadata(String id, String title, String author){
+    public Media(String id, String title, String author){
         super(id);
         this.title = title;
         this.author = author;

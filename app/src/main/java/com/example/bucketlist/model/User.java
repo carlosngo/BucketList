@@ -5,7 +5,6 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.ArrayList;
 
 @IgnoreExtraProperties
-//public class User extends Model {
 public class User {
     private String email, password;
     private ArrayList<String> books, games, movies, series, goals;
@@ -14,11 +13,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-//    public User(String id, String email, String password){
-//        super(id);
-//        this.email = email;
-//        this.password = password;
-//    }
 
     public String getEmail() {
         return email;
