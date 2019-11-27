@@ -3,19 +3,12 @@ package com.example.bucketlist.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class Goal extends Model {
-    private Metadata data;
-
+public class Goal extends Media {
     public Goal(){
 
     }
 
-    public Goal(String id, Metadata data){
-        super(id);
-        this.data = data;
-    }
-
-    public Metadata getData() {
-        return data;
+    public Goal(String id, String title, String author){
+        super(id, title, author);
     }
 }
