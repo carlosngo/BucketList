@@ -23,6 +23,7 @@ import com.example.bucketlist.dao.BookDAO;
 import com.example.bucketlist.dao.Database;
 import com.example.bucketlist.model.Book;
 import com.example.bucketlist.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +43,6 @@ public class BooksFragment extends Fragment {
     ValueEventListener bookChangeListener;
 
     BookDAO bookDAO;
-    MetadataDAO metadataDAO;
 
     LinearLayout listLayout, newLayout;
     ArrayList<Book> books;
@@ -76,8 +76,9 @@ public class BooksFragment extends Fragment {
                 //Remove swiped item from list and notify the RecyclerView
                 int position = viewHolder.getAdapterPosition();
                 String bookId = bookAdapter.getBook(position).getId();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 if (swipeDir == ItemTouchHelper.LEFT) {
-                    bookDAO.delete(bookId);
+                    bookDAO.delete(userId, bookId);
 //                    books.remove(position);
 //                    bookAdapter.notifyItemRemoved(position);
                 }
@@ -91,7 +92,6 @@ public class BooksFragment extends Fragment {
 
 
         bookDAO = Database.getBookDAO();
-        metadataDAO = Database.getMetadataDAO();
         bookReference = bookDAO.getBookReference();
         books = new ArrayList<>();
 //        displayItems(categories);
