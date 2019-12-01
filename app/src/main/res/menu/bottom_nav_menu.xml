@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:icon="@drawable/ic_home_black_24dp"-->
+<!--        android:title="@string/title_home" />-->
 
     <item
         android:id="@+id/navigation_films"
@@ -20,4 +20,14 @@
         android:id="@+id/navigation_games"
         android:icon="@drawable/games"
         android:title="@string/title_games" />
+
+    <item
+        android:id="@+id/navigation_series"
+        android:icon="@drawable/series"
+        android:title="@string/title_series" />
+
+    <item
+        android:id="@+id/navigation_goals"
+        android:icon="@drawable/goals"
+        android:title="@string/title_goals" />
 </menu>
