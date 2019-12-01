@@ -37,7 +37,6 @@ public class ManualAddActivity extends AppCompatActivity {
 
                 String nameInput = name.getText().toString();
                 String category = selectedCategory.getText().toString();
-                String optionalDescription = description.getText().toString();
 
                 if(nameInput.length()==0 || category.length()==0){
                     Toast.makeText(ManualAddActivity.this,
@@ -46,6 +45,13 @@ public class ManualAddActivity extends AppCompatActivity {
                     Toast.makeText(ManualAddActivity.this,
                             "Successfully added " +name.getText().toString()+" ("+selectedCategory.getText()+")"+
                                     " to bucket list.", Toast.LENGTH_SHORT).show();
+                    
+                    if(description.getText().toString().length()==0){
+                        String itemDescription = "No description.";
+                    }
+                    else{
+                        String optionalDescription = description.getText().toString();
+                    }
                     // add new Book object into db lines here
 
                     setResult(0);
