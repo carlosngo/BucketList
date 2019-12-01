@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="8dp"
+    android:paddingLeft="3dp">
 
     <TextView
         android:id="@+id/text_series"
@@ -18,17 +20,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="48dp"
-        android:layout_marginLeft="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="26dp">
         <LinearLayout
             android:id="@+id/listLayout"
             android:orientation="vertical"
-            android:padding="10dip"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp"
+            android:paddingBottom="80dp">
 
         </LinearLayout>
     </ScrollView>
