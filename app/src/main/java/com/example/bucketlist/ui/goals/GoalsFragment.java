@@ -54,28 +54,6 @@ public class GoalsFragment extends Fragment {
             }
         });
 
-        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(root.getContext(), "on Move", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(root.getContext(), "on Swiped ", Toast.LENGTH_SHORT).show();
-                int position = viewHolder.getAdapterPosition();
-                String goalId = adapter.getGoal(position).getId();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                if (swipeDir == ItemTouchHelper.LEFT) {
-
-                }
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerArea);
-
         notes = new ArrayList<>();
         notes.add(new Goal("firebase push id","Read book", "GOAL", "read at least 1 book"));
         notes.add(new Goal("firebase push id","Get thin", "GOAL", "lose 300 pounds"));

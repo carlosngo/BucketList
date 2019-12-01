@@ -87,15 +87,20 @@ public class LandingActivity extends AppCompatActivity {
         if (id == R.id.action_search) {
             return true;
         }
+        else if(id == R.id.home) {
+            Toast.makeText(getApplicationContext(),"View All Items",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LandingActivity.this, ViewAllActivity.class));
+            return true;
+        }
+        else if(id == R.id.account) {
+            startActivity(new Intent(LandingActivity.this, PasswordConfirmationActivity.class));
+            return true;
+        }
         else if(id == R.id.logout) {
             Toast.makeText(getApplicationContext(),"Log Out",Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
             finish();
             startActivity(new Intent(LandingActivity.this, MainActivity.class));
-            return true;
-        }
-        else if(id == R.id.account) {
-            startActivity(new Intent(LandingActivity.this, PasswordConfirmationActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

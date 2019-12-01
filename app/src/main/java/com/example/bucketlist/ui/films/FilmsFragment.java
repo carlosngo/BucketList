@@ -46,28 +46,6 @@ public class FilmsFragment extends Fragment {
             }
         });
 
-        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(root.getContext(), "on Move", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(root.getContext(), "on Swiped ", Toast.LENGTH_SHORT).show();
-                int position = viewHolder.getAdapterPosition();
-                String movieId = adapter.getFilm(position).getId();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                if (swipeDir == ItemTouchHelper.LEFT) {
-
-                }
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerArea);
-
         notes = new ArrayList<>();
         notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
         notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));

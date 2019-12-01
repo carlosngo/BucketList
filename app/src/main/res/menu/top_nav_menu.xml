@@ -12,13 +12,18 @@
         />
 
     <item
-        android:id="@+id/logout"
-        android:icon="@drawable/log_out"
-        android:title="@string/action_logout"
+        android:id="@+id/home"
+        android:title="@string/action_viewAll"
         />
 
     <item
         android:id="@+id/account"
         android:title="@string/action_account"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/log_out"
+        android:title="@string/action_logout"
         />
 </menu>
