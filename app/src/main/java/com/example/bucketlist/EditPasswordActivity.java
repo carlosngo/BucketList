@@ -3,6 +3,7 @@ package com.example.bucketlist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +21,14 @@ public class EditPasswordActivity extends AppCompatActivity {
     EditText passwordInput;
     FirebaseAuth mAuth;
     FrameLayout progressOverlay;
+    String pw;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_password);
-
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
         cancel = (Button) findViewById(R.id.backBtn);
         save = (Button) findViewById(R.id.saveBtn);
@@ -35,7 +38,7 @@ public class EditPasswordActivity extends AppCompatActivity {
 
 
     public void save(View v){
-        String pw = passwordInput.getText().toString();
+        pw = passwordInput.getText().toString();
         if(pw.length()>=6){
             progressOverlay.setVisibility(View.VISIBLE);
             mAuth.getCurrentUser().updatePassword(pw).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -43,6 +46,9 @@ public class EditPasswordActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     progressOverlay.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("password", pw);
+                        editor.commit();
                         Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

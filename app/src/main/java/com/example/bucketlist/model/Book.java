@@ -10,7 +10,7 @@ public class Book extends Note {
     private String name;
     private String author;
 
-    public Book(String id, String category, String name, String author) {
+    public Book(String id, String name, String category, String author) {
         super(id, name, category, author);
         this.id = id;
         this.category = category;

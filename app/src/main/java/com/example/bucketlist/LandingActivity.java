@@ -29,11 +29,15 @@ import androidx.navigation.ui.NavigationUI;
 public class LandingActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private String pw;
+    private SharedPreferences prf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        pw = intent.getStringExtra("PW");
         toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -81,12 +85,7 @@ public class LandingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
@@ -96,13 +95,21 @@ public class LandingActivity extends AppCompatActivity {
             return true;
         }
         else if(id == R.id.account) {
-            startActivity(new Intent(LandingActivity.this, PasswordConfirmationActivity.class));
+//            startActivity(new Intent(LandingActivity.this, PasswordConfirmationActivity.class));
+            Intent intent = new Intent(LandingActivity.this, EditAccountActivity.class);
+//            intent.putExtra("PASSWORD", pw);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.logout) {
             Toast.makeText(getApplicationContext(),"Log Out",Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
             finish();
+            prf = getSharedPreferences("user_details", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prf.edit();
+            editor.clear();
+            editor.commit();
+
             startActivity(new Intent(LandingActivity.this, MainActivity.class));
             return true;
         }

@@ -9,23 +9,23 @@ import android.widget.*;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    EditText email, pwd;
-    Button loginBtn, registerBtn;
-    Intent intent;
-    FrameLayout progressOverlay;
+    private EditText email, pwd;
+    private Button loginBtn, registerBtn;
+    private Intent intent;
+    private FrameLayout progressOverlay;
     private FirebaseAuth mAuth;
-    String emailAddress, password;
+    private String emailAddress, password;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
         email = (EditText)findViewById(R.id.txtName);
         pwd = (EditText)findViewById(R.id.txtPwd);
@@ -45,7 +45,13 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressOverlay.setVisibility(View.GONE);
                             if(task.isSuccessful()){
-                                startActivity(new Intent(MainActivity.this, LandingActivity.class));
+//                                startActivity(new Intent(MainActivity.this, LandingActivity.class));
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("password", password);
+                                editor.commit();
+                                Intent intent = new Intent(MainActivity.this, LandingActivity.class);
+//                                intent.putExtra("PW",password);
+                                startActivity(intent);
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Invalid email or password.",Toast.LENGTH_SHORT).show();
@@ -71,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         if(mAuth.getCurrentUser() != null){
-            startActivity(new Intent(MainActivity.this, LandingActivity.class));
-            //Toast.makeText(getApplicationContext(),"Welcome "+mAuth.getCurrentUser().getEmail(),Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(MainActivity.this, LandingActivity.class));
+//            Toast.makeText(getApplicationContext(),"Welcome "+mAuth.getCurrentUser().getEmail(),Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, LandingActivity.class);
+//            intent.putExtra(pref.getString("password", null),"PW");
+            startActivity(intent);
         }
     }
 

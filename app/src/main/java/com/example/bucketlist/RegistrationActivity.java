@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,18 +22,18 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    EditText email, pwd;
-    Button registerBtn, backbtn;
-    Intent intent;
-    FirebaseAuth mAuth;
-    FrameLayout progressOverlay;
-    String emailAddress, password;
+    private EditText email, pwd;
+    private Button registerBtn, backbtn;
+    private FirebaseAuth mAuth;
+    private FrameLayout progressOverlay;
+    private String emailAddress, password;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
         mAuth = FirebaseAuth.getInstance();
         email = (EditText)findViewById(R.id.txtName);
         pwd = (EditText)findViewById(R.id.txtPwd);
@@ -94,7 +95,14 @@ public class RegistrationActivity extends AppCompatActivity {
                                         progressOverlay.setVisibility(View.INVISIBLE);
                                         Toast.makeText(getApplicationContext(),"Registration Successful.",Toast.LENGTH_SHORT).show();
                                         finish();
+//                                        Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
+//                                        startActivity(intent);
+
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString("password", password);
+                                        editor.commit();
                                         Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
+//                                        intent.putExtra("PW",password);
                                         startActivity(intent);
                                     } else {
                                         progressOverlay.setVisibility(View.INVISIBLE);

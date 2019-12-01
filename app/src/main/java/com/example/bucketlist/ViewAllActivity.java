@@ -9,7 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bucketlist.model.Book;
+import com.example.bucketlist.model.Game;
+import com.example.bucketlist.model.Goal;
+import com.example.bucketlist.model.Movie;
 import com.example.bucketlist.model.Note;
+import com.example.bucketlist.model.Series;
 import com.example.bucketlist.ui.NoteAdapter;
 
 import java.util.ArrayList;
@@ -30,16 +35,16 @@ public class ViewAllActivity extends AppCompatActivity {
         backBtn = (Button) findViewById(R.id.backBtn);
 
         notes = new ArrayList<>();
-        notes.add(new Note("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
-        notes.add(new Note("firebase push id","Charlotte's web", "BOOK", "M. S."));
-        notes.add(new Note("firebase push id","Read book", "GOAL", "read at least 1 book"));
-        notes.add(new Note("firebase push id","Get thin", "GOAL", "lose 300 pounds"));
-        notes.add(new Note("firebase push id","One Piece", "SERIES", "Japanese Series"));
-        notes.add(new Note("firebase push id","Probinsyano", "SERIES", "Filipino Series"));
-        notes.add(new Note("firebase push id","Kimi no nawa", "FILM", "anime"));
-        notes.add(new Note("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
-        notes.add(new Note("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
-        notes.add(new Note("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
+        notes.add(new Book("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
+        notes.add(new Book("firebase push id","Charlotte's web", "BOOK", "M. S."));
+        notes.add(new Goal("firebase push id","Read book", "GOAL", "read at least 1 book"));
+        notes.add(new Goal("firebase push id","Get thin", "GOAL", "lose 300 pounds"));
+        notes.add(new Series("firebase push id","One Piece", "SERIES", "Japanese Series"));
+        notes.add(new Series("firebase push id","Probinsyano", "SERIES", "Filipino Series"));
+        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
+        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
+        notes.add(new Game("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
+        notes.add(new Game("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
 
         if(notes.size()==0){
             blankMessage = findViewById(R.id.blankMessage);

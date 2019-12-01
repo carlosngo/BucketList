@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class PasswordConfirmationActivity extends AppCompatActivity {
     Button editAccount, backBtn;
     EditText passwordInput;
-    String pw;
+    String choice, pw;
     FirebaseAuth mAuth;
     FrameLayout progressOverlay;
 
@@ -31,6 +31,8 @@ public class PasswordConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_confirmation);
 
+        Intent intent = getIntent();
+        choice = intent.getStringExtra("CHOICE");
         mAuth = FirebaseAuth.getInstance();
         editAccount = (Button) findViewById(R.id.editAccount);
         backBtn = (Button) findViewById(R.id.backBtn);
@@ -52,7 +54,13 @@ public class PasswordConfirmationActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             progressOverlay.setVisibility(View.GONE);
                             if(task.isSuccessful()){
-                                startActivity(new Intent(PasswordConfirmationActivity.this, EditAccountActivity.class));
+//                                startActivity(new Intent(PasswordConfirmationActivity.this, EditAccountActivity.class));
+                                if(choice.equals("EMAIL")){
+                                    startActivity(new Intent(PasswordConfirmationActivity.this, EditEmailActivity.class));
+                                }
+                                else if(choice.equals("PASSWORD")){
+                                    startActivity(new Intent(PasswordConfirmationActivity.this, EditPasswordActivity.class));
+                                }
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Invalid Password"+task.getException(), Toast.LENGTH_LONG).show();
