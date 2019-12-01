@@ -104,21 +104,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucketlist.R;
 import com.example.bucketlist.model.Note;
 import com.example.bucketlist.ui.NoteAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -155,34 +152,6 @@ public class HomeFragment extends Fragment {
         adapter = new NoteAdapter(getActivity());
         recyclerArea.setAdapter(adapter);
 
-        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(root.getContext(), "on Move", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(root.getContext(), "on Swiped ", Toast.LENGTH_SHORT).show();
-                //Remove swiped item from list and notify the RecyclerView
-                int position = viewHolder.getAdapterPosition();
-                //String bookId = bookAdapter.getBook(position).getId();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                if (swipeDir == ItemTouchHelper.LEFT) {
-//                    bookDAO.delete(userId, bookId);
-//                    books.remove(position);
-//                    bookAdapter.notifyItemRemoved(position);
-                }
-//                arrayList.remove(position);
-//                adapter.notifyDataSetChanged();
-
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerArea);
-
         notes = new ArrayList<>();
         notes.add(new Note("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
         notes.add(new Note("firebase push id","Charlotte's web", "BOOK", "M. S."));
@@ -195,10 +164,6 @@ public class HomeFragment extends Fragment {
         notes.add(new Note("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
         notes.add(new Note("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
         for(Note n : notes){
-//            String name = notes.get(i).getName();
-//            String category = notes.get(i).getCategory();
-//            String description = notes.get(i).getDescription();
-//            adapter.addItem(name, category, description);
             adapter.addItem(n);
         }
         return root;

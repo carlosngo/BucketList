@@ -1,130 +1,36 @@
-//package com.example.bucketlist.ui.films;
-//
-//import android.graphics.Color;
-//import android.os.Bundle;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.LinearLayout;
-//import android.widget.RelativeLayout;
-//import android.widget.TextView;
-//
-//import androidx.annotation.Nullable;
-//import androidx.annotation.NonNull;
-//import androidx.fragment.app.Fragment;
-//import androidx.lifecycle.Observer;
-//import androidx.lifecycle.ViewModelProviders;
-//
-//import com.example.bucketlist.model.Book;
-//import com.example.bucketlist.R;
-//
-//import java.util.ArrayList;
-//
-//public class FilmsFragment extends Fragment {
-//
-//    private FilmsViewModel filmsViewModel;
-//    View root;
-//    LinearLayout listLayout, newLayout;
-//    ArrayList<Book> categories;
-//
-//    public View onCreateView(@NonNull LayoutInflater inflater,
-//                             ViewGroup container, Bundle savedInstanceState) {
-//        filmsViewModel =
-//                ViewModelProviders.of(this).get(FilmsViewModel.class);
-////        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-//        root = inflater.inflate(R.layout.fragment_films, container, false);
-//        final TextView textView = root.findViewById(R.id.text_films);
-//        filmsViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-//        listLayout = root.findViewById(R.id.listLayout);
-//        displayItems(categories);
-//        return root;
-//    }
-//
-//    public void displayItems(ArrayList<Book> categories){
-////        for(Notes n : categories){
-//        for(int i=0; i<3; i++){
-//            newLayout = new LinearLayout(getContext());
-//            newLayout.setOrientation(LinearLayout.VERTICAL);
-//            newLayout.setLayoutParams(new ViewGroup.LayoutParams(
-//                    ViewGroup.LayoutParams.MATCH_PARENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
-//            RelativeLayout.LayoutParams parameter = new RelativeLayout.LayoutParams(
-//                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-//                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-//            parameter.setMargins(30, 32, 10, 0); // left, top, right, bottom
-//            newLayout.setLayoutParams(parameter);
-//            newLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // go to details page of selected item
-//                }
-//            });
-//
-//            final TextView nameField = new TextView(getContext());
-//            nameField.setLayoutParams(new ViewGroup.LayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
-//            nameField.setTextSize(20);
-//            nameField.setTextColor(Color.parseColor("#000000"));
-//
-//            final TextView catField = new TextView(getContext());
-//            catField.setLayoutParams(new ViewGroup.LayoutParams(
-//                    ViewGroup.LayoutParams.WRAP_CONTENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT));
-//            catField.setTextColor(Color.parseColor("#7f7f7f"));
-//            catField.setTextSize(14);
-//
-//            //sample films to show ui
-//            nameField.setText("Film"+i);
-//            catField.setText("FILM");
-//
-////            nameField.setText(n.getName());
-////            catField.setText(n.getCategory());
-//
-//            newLayout.addView(nameField);
-//            newLayout.addView(catField);
-//
-//            listLayout.addView(newLayout);
-//        }
-//    }
-//}
-
 package com.example.bucketlist.ui.films;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bucketlist.model.Note;
 import com.example.bucketlist.R;
+import com.example.bucketlist.model.Movie;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
 public class FilmsFragment extends Fragment {
 
     private FilmsViewModel filmsViewModel;
-    View root;
-    LinearLayout listLayout, newLayout;
-    ArrayList<Note> notes;
+    private View root;
+    private RecyclerView recyclerArea;
+    private FilmAdapter adapter;
+    private RecyclerView.LayoutManager manager;
+    private ArrayList<Movie> notes;
+    private TextView blankMessage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -139,69 +45,47 @@ public class FilmsFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        listLayout = root.findViewById(R.id.listLayout);
-        displayItems(notes);
-        return root;
-    }
 
-    public void displayItems(ArrayList<Note> notes){
-//        for(Notes n : notes){
-        for(int i=0; i<7; i++){
-            newLayout = new LinearLayout(getContext());
-            newLayout.setOrientation(LinearLayout.VERTICAL);
-            newLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            RelativeLayout.LayoutParams parameter = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-            parameter.setMargins(0, 0, 10, 0); // left, top, right, bottom
-            newLayout.setPadding(10,10,10,10);
-            newLayout.setLayoutParams(parameter);
-            newLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // go to details page of selected item
-                    Toast.makeText(getContext(), "go to this game's NoteDetailsActivity", Toast.LENGTH_SHORT).show();
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(root.getContext(), "on Move", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                Toast.makeText(root.getContext(), "on Swiped ", Toast.LENGTH_SHORT).show();
+                int position = viewHolder.getAdapterPosition();
+                String movieId = adapter.getFilm(position).getId();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                if (swipeDir == ItemTouchHelper.LEFT) {
+
                 }
-            });
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerArea);
 
-            final TextView nameField = new TextView(getContext());
-            nameField.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            nameField.setTextSize(22);
-            nameField.setTextColor(Color.parseColor("#000000"));
+        notes = new ArrayList<>();
+        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
+        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
 
-            final TextView catField = new TextView(getContext());
-            catField.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            catField.setTextColor(Color.parseColor("#7f7f7f"));
-            catField.setTextSize(14);
-
-            final TextView desField = new TextView(getContext());
-            desField.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            desField.setTextColor(Color.parseColor("#000000"));
-            desField.setTextSize(18);
-
-            //sample films to show ui
-            nameField.setText("Film"+(i+1));
-            catField.setText("FILM");
-            desField.setText("film info stuff "+(i+1));
-
-//            nameField.setText(n.getName());
-//            catField.setText(n.getCategory());
-
-            newLayout.addView(nameField);
-            newLayout.addView(catField);
-            newLayout.addView(desField);
-
-
-            newLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.border));
-            listLayout.addView(newLayout);
+        if(notes.size()==0){
+            blankMessage = root.findViewById(R.id.blankMessage);
+            blankMessage.setVisibility(View.VISIBLE);
         }
+        else{
+            recyclerArea = root.findViewById(R.id.recycler_area);
+            manager = new LinearLayoutManager(getContext());
+            recyclerArea.setLayoutManager(manager);
+            adapter = new FilmAdapter(getActivity());
+            recyclerArea.setAdapter(adapter);
+            for(Movie n : notes){
+                adapter.addItem(n);
+            }
+        }
+        return root;
     }
 }

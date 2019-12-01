@@ -1,9 +1,6 @@
 package com.example.bucketlist.dao;
 
-import androidx.annotation.NonNull;
-
-import com.example.bucketlist.model.Model;
-import com.example.bucketlist.model.Movie;
+import com.example.bucketlist.model.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +17,7 @@ public class MovieDAO implements DataAccessObject {
     }
 
     @Override
-    public String add(Model model){
+    public String add(Note model){
         Movie movie = (Movie)model;
         DatabaseReference databaseMovie = getMovieReference();
         String id = databaseMovie.push().getKey();
@@ -38,7 +35,7 @@ public class MovieDAO implements DataAccessObject {
     }
 
     @Override
-    public void update(String movieId, Model model){
+    public void update(String movieId, Note model){
         DatabaseReference updateMovie = getMovieReference().child(movieId);
         updateMovie.setValue((Movie)model);
     }

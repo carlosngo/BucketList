@@ -1,7 +1,6 @@
 package com.example.bucketlist.dao;
 
-import com.example.bucketlist.model.Book;
-import com.example.bucketlist.model.Model;
+import com.example.bucketlist.model.*;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -15,7 +14,7 @@ public class BookDAO implements DataAccessObject{
     }
 
     @Override
-    public String add(Model model){
+    public String add(Note model){
         Book book = (Book)model;
         DatabaseReference databaseBook = getBookReference();
         String id = databaseBook.push().getKey();
@@ -33,7 +32,7 @@ public class BookDAO implements DataAccessObject{
     }
 
     @Override
-    public void update(String bookId, Model model){
+    public void update(String bookId, Note model){
         DatabaseReference updateBook = getBookReference().child(bookId);
         updateBook.setValue((Book)model);
     }

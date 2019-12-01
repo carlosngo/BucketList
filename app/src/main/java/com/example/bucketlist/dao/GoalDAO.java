@@ -1,9 +1,7 @@
 package com.example.bucketlist.dao;
 
-import androidx.annotation.NonNull;
 
-import com.example.bucketlist.model.Goal;
-import com.example.bucketlist.model.Model;
+import com.example.bucketlist.model.*;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +18,7 @@ public class GoalDAO implements DataAccessObject {
     }
 
     @Override
-    public String add(Model model){
+    public String add(Note model){
         Goal goal = (Goal)model;
         DatabaseReference databaseGoal = getGoalReference();
         String id = databaseGoal.push().getKey();
@@ -38,7 +36,7 @@ public class GoalDAO implements DataAccessObject {
     }
 
     @Override
-    public void update(String goalId, Model model){
+    public void update(String goalId, Note model){
         DatabaseReference updateGame = getGoalReference().child(goalId);
         updateGame.setValue((Goal)model);
     }

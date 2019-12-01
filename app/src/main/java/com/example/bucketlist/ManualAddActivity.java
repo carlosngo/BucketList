@@ -12,7 +12,7 @@ public class ManualAddActivity extends AppCompatActivity {
     private RadioGroup categoryChoices;
     private RadioButton selectedCategory;
     private Button addBtn, backBtn;
-    private EditText name;
+    private EditText name, description;
     private StorageReference mStorageRef;
     private FrameLayout progressbar;
 
@@ -25,6 +25,7 @@ public class ManualAddActivity extends AppCompatActivity {
         addBtn = (Button) findViewById(R.id.addBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
         name = (EditText) findViewById(R.id.name);
+        description = (EditText) findViewById(R.id.description);
         progressbar = (FrameLayout) findViewById(R.id.progress_overlay);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -33,8 +34,10 @@ public class ManualAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int selectedId = categoryChoices.getCheckedRadioButtonId();
                 selectedCategory = (RadioButton) findViewById(selectedId);
+
                 String nameInput = name.getText().toString();
                 String category = selectedCategory.getText().toString();
+                String optionalDescription = description.getText().toString();
 
                 if(nameInput.length()==0 || category.length()==0){
                     Toast.makeText(ManualAddActivity.this,
