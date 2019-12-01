@@ -16,23 +16,20 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text='Search Results For "The Sound of Music"'
+            android:text='Search Results For "[search input]"'
             android:textSize="24dp" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_area"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="8">
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/listLayout"
-                android:orientation="vertical"
-                android:padding="10dip"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+            android:layout_weight="8"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_home"/>
 
-            </LinearLayout>
-        </ScrollView>
         <Button
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -48,3 +45,54 @@
             android:background="@drawable/button_bg_rounded_corners"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    tools:context=".SearchResultsActivity">-->
+    <!--    <LinearLayout-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:layout_marginLeft="10dp">-->
+
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:text='Search Results For "[search input]"'-->
+    <!--            android:textSize="24dp" />-->
+
+    <!--        <ScrollView-->
+    <!--            android:layout_width="fill_parent"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="8">-->
+    <!--            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--                android:id="@+id/listLayout"-->
+    <!--                android:orientation="vertical"-->
+    <!--                android:padding="10dip"-->
+    <!--                android:layout_width="fill_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="10dp">-->
+
+    <!--            </LinearLayout>-->
+    <!--        </ScrollView>-->
+    <!--        <Button-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="0dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:layout_marginBottom="5dp"-->
+    <!--            android:layout_marginRight="5dp"-->
+    <!--            android:layout_marginLeft="5dp"-->
+    <!--            android:textSize="18dp"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:text="I CAN'T FIND WHAT I'M LOOKING FOR"-->
+    <!--            android:onClick="manualAdd"-->
+    <!--            android:textColor="@android:color/white"-->
+    <!--            android:background="@drawable/button_bg_rounded_corners"/>-->
+    <!--    </LinearLayout>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

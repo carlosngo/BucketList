@@ -16,14 +16,24 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucketlist.dao.BookDAO;
 import com.example.bucketlist.model.*;
 import com.example.bucketlist.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class BooksFragment extends Fragment {
 
+//    RecyclerView listBooks;
+//    BookAdapter bookAdapter;
+//
+//    DatabaseReference bookReference;
+//    ValueEventListener bookChangeListener;
+//
+//    BookDAO bookDAO;
     private BooksViewModel booksViewModel;
     private View root;
     private RecyclerView recyclerArea;
@@ -67,6 +77,29 @@ public class BooksFragment extends Fragment {
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerArea);
+
+
+//        bookDAO = Database.getBookDAO();
+//        bookReference = bookDAO.getBookReference();
+//        books = new ArrayList<>();
+////        displayItems(categories);
+//        bookChangeListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                books.clear();
+//                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+//                    books.add(bookSnap.getValue(Book.class));
+//                }
+//                bookAdapter = new BookAdapter(books);
+//                listBooks.setAdapter(bookAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        };
+//        bookReference.addValueEventListener(bookChangeListener);
 
         notes = new ArrayList<>();
         notes.add(new Book("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
