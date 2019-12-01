@@ -8,14 +8,22 @@ public class Book extends Note {
     private String id;
     private String category;
     private String name;
-    private String description;
+    private String author;
 
-    public Book(String cid, String cname,String cat, String des){
-        super(cid, cname, cat, des);
-        id = cid;
-        name = cname;
-        category = cat;
-        description = des;
+    public Book(String id, String category, String name, String author) {
+        super(id, name, category, author);
+        this.id = id;
+        this.category = category;
+        this.name = name;
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getName() {
@@ -35,11 +43,11 @@ public class Book extends Note {
     }
 
     public String getDescription() {
-        return description;
+        return author;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.author = description;
     }
 
     public String getId() {

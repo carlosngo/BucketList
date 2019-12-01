@@ -20,6 +20,7 @@ public class NoteHolder extends RecyclerView.ViewHolder{
     private TextView name;
     private TextView cat;
     private TextView des;
+    private ImageView icon;
     private String id;
     private LinearLayout row;
 
@@ -28,7 +29,8 @@ public class NoteHolder extends RecyclerView.ViewHolder{
 
         row = view.findViewById(R.id.row);
         name = view.findViewById(R.id.name_field);
-        cat = view.findViewById(R.id.cat_field);
+        icon = view.findViewById(R.id.imageView);
+        //cat = view.findViewById(R.id.cat_field);
         des = view.findViewById(R.id.description_field);
 
         row.setOnClickListener(new View.OnClickListener() {
@@ -59,5 +61,25 @@ public class NoteHolder extends RecyclerView.ViewHolder{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setIcon(String category) {
+        switch (category) {
+            case "FILM":
+                icon.setImageResource(R.drawable.blk_films);
+                break;
+            case "BOOK":
+                icon.setImageResource(R.drawable.blk_book);
+                break;
+            case "GAME":
+                icon.setImageResource(R.drawable.blk_games);
+                break;
+            case "SERIES":
+                icon.setImageResource(R.drawable.blk_series);
+                break;
+            case "GOAL":
+                icon.setImageResource(R.drawable.blk_goals);
+                break;
+        }
     }
 }

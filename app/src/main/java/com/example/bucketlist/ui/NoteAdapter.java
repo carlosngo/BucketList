@@ -42,7 +42,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteHolder>{
     @Override
     public void onBindViewHolder(NoteHolder holder, final int position) {
         holder.setName(contactList.get(position).getName());
-        holder.setCat(contactList.get(position).getCategory());
+        holder.setIcon(contactList.get(position).getCategory());
+//        holder.setCat(contactList.get(position).getCategory());
         holder.setDescription(contactList.get(position).getDescription());
         holder.setId(contactList.get(position).getId()+""+position);
     }

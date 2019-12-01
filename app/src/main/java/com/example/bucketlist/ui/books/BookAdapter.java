@@ -9,48 +9,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucketlist.R;
 import com.example.bucketlist.model.*;
-import com.example.bucketlist.ui.books.*;
 
 import java.util.ArrayList;
 
 public class BookAdapter extends RecyclerView.Adapter<BookHolder>  {
 
-    private ArrayList<Book> contactList;
+    private ArrayList<Book> books;
     private Activity context;
 
     public BookAdapter(Activity activity){
         context = activity;
-        contactList = new ArrayList<Book>();
+        books = new ArrayList<Book>();
     }
 
     @Override
     public BookHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.note_row, parent, false);
+        View view = inflater.inflate(R.layout.book_row, parent, false);
         BookHolder holder = new BookHolder(view,context);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(BookHolder holder, final int position) {
-        holder.setName(contactList.get(position).getName());
-        holder.setCat(contactList.get(position).getCategory());
-        holder.setDescription(contactList.get(position).getDescription());
-        holder.setId(contactList.get(position).getId()+""+position);
+        holder.setName(books.get(position).getName());
+        //holder.setCat(books.get(position).getCategory());
+        holder.setDescription(books.get(position).getDescription());
+        holder.setId(books.get(position).getId()+""+position);
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return books.size();
     }
 
     public void addItem(Book n){
-        contactList.add(n);
-        notifyItemInserted(contactList.size()-1);
+        books.add(n);
+        notifyItemInserted(books.size()-1);
     }
 
     public Book getBook(int position) {
-        return contactList.get(position);
+        return books.get(position);
     }
 }
 

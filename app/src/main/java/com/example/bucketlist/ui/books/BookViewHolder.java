@@ -14,8 +14,8 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
 
     public BookViewHolder(@NonNull View itemView) {
         super(itemView);
-        txtTitle = itemView.findViewById(R.id.txtTitle);
-        txtAuthor = itemView.findViewById(R.id.txtAuthor);
+//        txtTitle = itemView.findViewById(R.id.txtTitle);
+//        txtAuthor = itemView.findViewById(R.id.txtAuthor);
     }
 
     public void setTitle(String newTitle) {

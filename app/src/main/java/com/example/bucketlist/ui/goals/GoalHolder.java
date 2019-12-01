@@ -27,7 +27,7 @@ public class GoalHolder extends RecyclerView.ViewHolder{
 
         row = view.findViewById(R.id.row);
         name = view.findViewById(R.id.name_field);
-        cat = view.findViewById(R.id.cat_field);
+        //cat = view.findViewById(R.id.cat_field);
         des = view.findViewById(R.id.description_field);
 
         row.setOnClickListener(new View.OnClickListener() {
