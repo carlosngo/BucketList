@@ -9,6 +9,8 @@ public class Movie extends Note {
     private String name;
     private String description;
 
+    public Movie() { }
+
     public Movie(String cid, String cname,String cat, String des){
         super(cid, cname, cat, des);
         id = cid;

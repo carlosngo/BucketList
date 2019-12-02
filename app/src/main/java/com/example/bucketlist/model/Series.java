@@ -9,6 +9,8 @@ public class Series extends Note {
     private String name;
     private String description;
 
+    public Series() { }
+
     public Series(String cid, String cname,String cat, String des){
         super(cid, cname, cat, des);
         id = cid;

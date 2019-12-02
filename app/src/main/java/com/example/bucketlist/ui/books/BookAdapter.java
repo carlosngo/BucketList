@@ -19,7 +19,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookHolder>  {
 
     public BookAdapter(Activity activity){
         context = activity;
-        books = new ArrayList<Book>();
+        this.books = new ArrayList<>();
     }
 
     @Override
@@ -50,6 +50,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookHolder>  {
 
     public Book getBook(int position) {
         return books.get(position);
+    }
+
+    public void clear() {
+        books.clear();
+        notifyDataSetChanged();
     }
 }
 

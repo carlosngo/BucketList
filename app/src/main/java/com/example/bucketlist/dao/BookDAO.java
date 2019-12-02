@@ -25,8 +25,6 @@ public class BookDAO implements DataAccessObject{
 
     @Override
     public void delete(String userId, String id) {
-        DatabaseReference databaseBook = getBookReference().child(id);
-        databaseBook.removeValue();
         DatabaseReference databaseUsers = getBookUnderUserReference(userId);
         databaseUsers.child(id).removeValue();
     }

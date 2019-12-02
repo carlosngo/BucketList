@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucketlist.R;
 import com.example.bucketlist.SearchResultsActivity;
+import com.example.bucketlist.model.*;
 
 // This class serves as the container class that the view rests on. All the manipulation and
 // interaction functions of the view is stored here.
@@ -63,23 +64,23 @@ public class NoteHolder extends RecyclerView.ViewHolder{
         this.id = id;
     }
 
-    public void setIcon(String category) {
-        switch (category) {
-            case "FILM":
-                icon.setImageResource(R.drawable.blk_films);
-                break;
-            case "BOOK":
-                icon.setImageResource(R.drawable.blk_book);
-                break;
-            case "GAME":
-                icon.setImageResource(R.drawable.blk_games);
-                break;
-            case "SERIES":
-                icon.setImageResource(R.drawable.blk_series);
-                break;
-            case "GOAL":
-                icon.setImageResource(R.drawable.blk_goals);
-                break;
+    public void setIcon(Note note) {
+
+        if (note instanceof Movie) {
+            icon.setImageResource(R.drawable.blk_films);
         }
+        else if (note instanceof Book) {
+            icon.setImageResource(R.drawable.blk_book);
+        }
+        if (note instanceof Game) {
+            icon.setImageResource(R.drawable.blk_games);
+        }
+        if (note instanceof Series) {
+            icon.setImageResource(R.drawable.blk_series);
+        }
+        if (note instanceof Goal) {
+            icon.setImageResource(R.drawable.blk_goals);
+        }
+
     }
 }

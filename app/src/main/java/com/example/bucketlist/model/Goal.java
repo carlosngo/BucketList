@@ -8,6 +8,8 @@ public class Goal extends Note {
     private String name;
     private String description;
 
+    public Goal() {}
+
     public Goal(String cid, String cname,String cat, String des){
         super(cid, cname, cat, des);
         id = cid;

@@ -9,6 +9,8 @@ public class Game extends Note {
     private String name;
     private String description;
 
+    public Game() { }
+
     public Game(String cid, String cname,String cat, String des){
         super(cid, cname, cat, des);
         id = cid;

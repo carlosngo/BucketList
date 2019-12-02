@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="3dp">
+    android:layout_marginTop="20dp">
     <TextView
         android:id="@+id/text_books"
         android:layout_width="match_parent"
@@ -12,36 +13,23 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_area"
+        android:id="@+id/listBooks"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="65dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_films" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:scrollbars="vertical"/>
 
     <TextView
         android:id="@+id/blankMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You have no items in your films section."
-        android:textSize="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="You have no items in your books section."
+        android:textSize="20dp"/>
+</LinearLayout>
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->

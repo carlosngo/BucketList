@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.example.bucketlist.dao.*;
+import com.example.bucketlist.model.*;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.StorageReference;
 
 public class ManualAddActivity extends AppCompatActivity {
@@ -15,6 +18,7 @@ public class ManualAddActivity extends AppCompatActivity {
     private EditText name, description;
     private StorageReference mStorageRef;
     private FrameLayout progressbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,9 @@ public class ManualAddActivity extends AppCompatActivity {
                 int selectedId = categoryChoices.getCheckedRadioButtonId();
                 selectedCategory = (RadioButton) findViewById(selectedId);
 
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String nameInput = name.getText().toString();
+                String descriptionInput;
                 String category = selectedCategory.getText().toString();
 
                 if(nameInput.length()==0 || category.length()==0){
@@ -47,13 +53,53 @@ public class ManualAddActivity extends AppCompatActivity {
                                     " to bucket list.", Toast.LENGTH_SHORT).show();
                     
                     if(description.getText().toString().length()==0){
-                        String itemDescription = "No description.";
+                        descriptionInput = "No description.";
                     }
                     else{
-                        String optionalDescription = description.getText().toString();
+                        descriptionInput = description.getText().toString();
                     }
-                    // add new Book object into db lines here
-
+                    String newId;
+                    switch (category) {
+                        case "Films":
+                            MovieDAO movieDAO = Database.getMovieDAO();
+                            Movie movie = new Movie();
+                            movie.setName(nameInput);
+                            movie.setDescription(descriptionInput);
+                            movieDAO.add(movie);
+                            break;
+                        case "Books":
+                            BookDAO bookDAO = Database.getBookDAO();
+                            Book book = new Book();
+                            book.setName(nameInput);
+                            book.setDescription(descriptionInput);
+                            newId = bookDAO.add(book);
+                            bookDAO.addBookUnderUser(newId, userId);
+                            break;
+                        case "Games":
+                            GameDAO gameDAO = Database.getGameDAO();
+                            Game game = new Game();
+                            game.setName(nameInput);
+                            game.setDescription(descriptionInput);
+                            newId = gameDAO.add(game);
+                            gameDAO.addGameUnderUser(newId, userId);
+                            break;
+                        case "Series":
+                            SeriesDAO seriesDAO = Database.getSeriesDAO();
+                            Series series = new Series();
+                            series.setName(nameInput);
+                            series.setDescription(descriptionInput);
+                            newId = seriesDAO.add(series);
+                            seriesDAO.addMetadataUnderSeries(newId, userId);
+                            break;
+                        case "Goals":
+                            GoalDAO goalDAO = Database.getGoalDAO();
+                            Goal goal = new Goal();
+                            goal.setName(nameInput);
+                            goal.setDescription(descriptionInput);
+                            newId = goalDAO.add(goal);
+                            goalDAO.addMetadataUnderGoal(newId, userId);
+                            break;
+                    }
                     setResult(0);
                     finish();
                 }

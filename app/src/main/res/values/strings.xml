@@ -18,7 +18,7 @@
     <string name="radio_books">Books</string>
     <string name="radio_games">Games</string>
     <string name="radio_series">Series</string>
-    <string name="radio_goals">Others</string>
+    <string name="radio_goals">Goals</string>
 
     <string name="title_activity_login">Log in</string>
     <string name="prompt_email">Email</string>

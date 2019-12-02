@@ -1,5 +1,6 @@
 package com.example.bucketlist.ui.books;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +17,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bucketlist.dao.BookDAO;
+import com.example.bucketlist.dao.*;
 import com.example.bucketlist.model.*;
 import com.example.bucketlist.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
@@ -27,23 +30,26 @@ import java.util.ArrayList;
 
 public class BooksFragment extends Fragment {
 
-//    RecyclerView listBooks;
-//    BookAdapter bookAdapter;
-//
-//    DatabaseReference bookReference;
-//    ValueEventListener bookChangeListener;
-//
-//    BookDAO bookDAO;
+    RecyclerView listBooks;
+    BookAdapter bookAdapter;
+
+    DatabaseReference bookReference;
+    DatabaseReference userBookReference;
+    ValueEventListener bookChangeListener;
+
+    BookDAO bookDAO;
     private BooksViewModel booksViewModel;
     private View root;
     private RecyclerView recyclerArea;
-    private BookAdapter adapter;
     private RecyclerView.LayoutManager manager;
-    private ArrayList<Book> notes;
     private TextView blankMessage;
+
+    private String userId;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         booksViewModel =
                 ViewModelProviders.of(this).get(BooksViewModel.class);
 //        root = inflater.inflate(R.layout.fragment_notifications, container, false);
@@ -56,69 +62,74 @@ public class BooksFragment extends Fragment {
             }
         });
 
-//        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
-//
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                Toast.makeText(root.getContext(), "on Move", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-//                Toast.makeText(root.getContext(), "on Swiped ", Toast.LENGTH_SHORT).show();
-//                int position = viewHolder.getAdapterPosition();
-//                String bookId = adapter.getBook(position).getId();
-//                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                if (swipeDir == ItemTouchHelper.LEFT) {
-//
-//                }
-//            }
-//        };
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
-//        itemTouchHelper.attachToRecyclerView(recyclerArea);
-//
-//
-//        bookDAO = Database.getBookDAO();
-//        bookReference = bookDAO.getBookReference();
-//        books = new ArrayList<>();
-////        displayItems(categories);
-//        bookChangeListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                books.clear();
-//                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
-//                    books.add(bookSnap.getValue(Book.class));
-//                }
-//                bookAdapter = new BookAdapter(books);
-//                listBooks.setAdapter(bookAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        };
-//        bookReference.addValueEventListener(bookChangeListener);
+        listBooks = root.findViewById(R.id.listBooks);
+        listBooks.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        blankMessage = root.findViewById(R.id.blankMessage);
 
-        notes = new ArrayList<>();
-        notes.add(new Book("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
-        notes.add(new Book("firebase push id","Charlotte's web", "BOOK", "M. S."));
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        bookDAO = Database.getBookDAO();
+        bookReference = bookDAO.getBookReference();
+        userBookReference = bookDAO.getBookUnderUserReference(userId);
+        bookAdapter = new BookAdapter(getActivity());
+        listBooks.setAdapter(bookAdapter);
 
-        if(notes.size()==0){
-            blankMessage = root.findViewById(R.id.blankMessage);
-            blankMessage.setVisibility(View.VISIBLE);
-        }
-        else{
-            recyclerArea = root.findViewById(R.id.recycler_area);
-            manager = new LinearLayoutManager(getContext());
-            recyclerArea.setLayoutManager(manager);
-            adapter = new BookAdapter(getActivity());
-            recyclerArea.setAdapter(adapter);
-            for(Book n: notes){
-                adapter.addItem(n);
+
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(getActivity(), "on Move", Toast.LENGTH_SHORT).show();
+                return false;
             }
-        }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+                int position = viewHolder.getAdapterPosition();
+                String bookId = bookAdapter.getBook(position).getId();
+                bookDAO.delete(userId, bookId);
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(listBooks);
+
+
+
+//        displayItems(categories);
+        bookChangeListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                bookAdapter.clear();
+
+                listBooks.setAdapter(bookAdapter);
+                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+                    String bookId = bookSnap.getKey();
+                    bookReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            bookAdapter.addItem(dataSnapshot.getValue(Book.class));
+                            blankMessage.setVisibility(View.INVISIBLE);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        userBookReference.addValueEventListener(bookChangeListener);
         return root;
     }
 }

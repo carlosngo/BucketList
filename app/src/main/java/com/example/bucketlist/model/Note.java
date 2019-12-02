@@ -8,6 +8,8 @@ public class Note {
     private String name;
     private String description;
 
+    public Note() {}
+
     public Note(String cid, String cname,String cat, String des){
         id = cid;
         name = cname;
