@@ -50,8 +50,8 @@ public class GamesFragment extends Fragment {
         notes.add(new Game("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
         notes.add(new Game("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
 
+        blankMessage = root.findViewById(R.id.blankMessage);
         if(notes.size()==0){
-            blankMessage = root.findViewById(R.id.blankMessage);
             blankMessage.setVisibility(View.VISIBLE);
         }
         else{

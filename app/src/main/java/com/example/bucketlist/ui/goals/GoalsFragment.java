@@ -58,8 +58,8 @@ public class GoalsFragment extends Fragment {
         notes.add(new Goal("firebase push id","Read book", "GOAL", "read at least 1 book"));
         notes.add(new Goal("firebase push id","Get thin", "GOAL", "lose 300 pounds"));
 
+        blankMessage = root.findViewById(R.id.blankMessage);
         if(notes.size()==0){
-            blankMessage = root.findViewById(R.id.blankMessage);
             blankMessage.setVisibility(View.VISIBLE);
         }
         else{

@@ -50,8 +50,8 @@ public class FilmsFragment extends Fragment {
 //        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
 //        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
 
+        blankMessage = root.findViewById(R.id.blankMessage);
         if(notes.size()==0){
-            blankMessage = root.findViewById(R.id.blankMessage);
             blankMessage.setVisibility(View.VISIBLE);
         }
         else{
