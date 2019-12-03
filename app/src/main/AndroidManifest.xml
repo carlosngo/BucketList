@@ -22,7 +22,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LandingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
+        </activity>
         <activity
             android:name=".ManualAddActivity"
             android:label="Add Note"
@@ -51,9 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchResultsActivity" />
+
         </activity>
     </application>
 

@@ -10,7 +10,7 @@ public final class Database {
     private static final SeriesDAO seriesDAO= new SeriesDAO();
     private static final GoalDAO goalDAO= new GoalDAO();
 
-    public static DatabaseReference getDatabaseReference() { return FirebaseDatabase.getInstance().getReference(); }
+    public static DatabaseReference getDatabaseReference() { return FirebaseDatabase.getInstance().getReference("categories"); }
 
     public static BookDAO getBookDAO() {
         return bookDAO;

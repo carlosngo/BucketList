@@ -1,5 +1,6 @@
 package com.example.bucketlist;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,53 +10,82 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bucketlist.model.Note;
+import com.example.bucketlist.dao.*;
+import com.example.bucketlist.model.*;
 import com.example.bucketlist.ui.NoteAdapter;
+import com.example.bucketlist.ui.SearchResultAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class SearchResultsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerArea;
-    private NoteAdapter adapter;
+    private TextView txtQuery;
+    private SearchResultAdapter adapter;
     private RecyclerView.LayoutManager manager;
-    ArrayList<Note> notes;
+    private String query;
+
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(getApplicationContext(), "You searched for: " + query, Toast.LENGTH_LONG).show();
-        }
-
+        txtQuery = findViewById(R.id.txtQuery);
         recyclerArea = findViewById(R.id.recycler_area);
         manager = new LinearLayoutManager(this);
         recyclerArea.setLayoutManager(manager);
-        adapter = new NoteAdapter(this);
+        adapter = new SearchResultAdapter(this);
         recyclerArea.setAdapter(adapter);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            databaseReference = Database.getDatabaseReference();
+            query = intent.getStringExtra(SearchManager.QUERY);
+            String s = "Search results for \"" + query + "\"";
+            txtQuery.setText(s);
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
+                        String category = categorySnapshot.getKey();
+                        for (DataSnapshot noteSnapshot : categorySnapshot.getChildren()) {
+                            String name = noteSnapshot.child("name").getValue(String.class);
+                            if (name.toLowerCase().replaceAll(" ", "").contains(query.toLowerCase().replaceAll(" ", ""))) {
+                                switch (category) {
+                                    case "movies":
+                                        adapter.addItem(noteSnapshot.getValue(Movie.class));
+                                        break;
+                                    case "books":
+                                        adapter.addItem(noteSnapshot.getValue(Book.class));
+                                        break;
+                                    case "games":
+                                        adapter.addItem(noteSnapshot.getValue(Game.class));
+                                        break;
+                                    case "series":
+                                        adapter.addItem(noteSnapshot.getValue(Series.class));
+                                        break;
+                                    case "goals":
+                                        adapter.addItem(noteSnapshot.getValue(Goal.class));
+                                        break;
+                                }
+                            }
+                        }
 
-        notes = new ArrayList<>();
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Charlotte's web", "BOOK", "M. S."));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Read book", "GOAL", "read at least 1 book"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Get thin", "GOAL", "lose 300 pounds"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","One Piece", "SERIES", "Japanese Series"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Probinsyano", "SERIES", "Filipino Series"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Kimi no nawa", "FILM", "anime"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
-        notes.add(new com.example.bucketlist.model.Note("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
-        for(com.example.bucketlist.model.Note n : notes){
-//            String name = notes.get(i).getName();
-//            String category = notes.get(i).getCategory();
-//            String description = notes.get(i).getDescription();
-//            adapter.addItem(name, category, description);
-            adapter.addItem(n);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/row"
+    android:paddingLeft="10dp"
+    android:paddingBottom="5dp"
+    android:background="@drawable/border">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:paddingRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="7dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/name_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Testing Title"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:paddingRight="5dp"/>
+
+            <TextView
+                android:id="@+id/description_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:text="Carlos" />
+        </LinearLayout>
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnAddNote"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="7dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/blk_add"
+        android:scaleType="fitCenter"
+        />
+
+</LinearLayout>
