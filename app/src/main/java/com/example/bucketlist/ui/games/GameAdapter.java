@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class GameAdapter extends RecyclerView.Adapter<GameHolder>  {
 
-    private ArrayList<Game> contactList;
+    private ArrayList<Game> games;
     private Activity context;
 
     public GameAdapter(Activity activity){
         context = activity;
-        contactList = new ArrayList<Game>();
+        games = new ArrayList<Game>();
     }
 
     @Override
@@ -32,23 +32,28 @@ public class GameAdapter extends RecyclerView.Adapter<GameHolder>  {
 
     @Override
     public void onBindViewHolder(GameHolder holder, final int position) {
-        holder.setName(contactList.get(position).getName());
+        holder.setName(games.get(position).getName());
         //holder.setCat(contactList.get(position).getCategory());
-        holder.setDescription(contactList.get(position).getDescription());
-        holder.setId(contactList.get(position).getId()+""+position);
+        holder.setDescription(games.get(position).getDescription());
+        holder.setId(games.get(position).getId()+""+position);
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return games.size();
     }
 
     public void addItem(Game n){
-        contactList.add(n);
-        notifyItemInserted(contactList.size()-1);
+        games.add(n);
+        notifyItemInserted(games.size()-1);
+    }
+
+    public void clear() {
+        games.clear();
+        notifyDataSetChanged();
     }
 
     public Game getGame(int position) {
-        return contactList.get(position);
+        return games.get(position);
     }
 }

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesHolder>  {
 
-    private ArrayList<Series> contactList;
+    private ArrayList<Series> series;
     private Activity context;
 
     public SeriesAdapter(Activity activity){
         context = activity;
-        contactList = new ArrayList<Series>();
+        series = new ArrayList<Series>();
     }
 
     @Override
@@ -32,23 +32,28 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesHolder>  {
 
     @Override
     public void onBindViewHolder(SeriesHolder holder, final int position) {
-        holder.setName(contactList.get(position).getName());
-        //holder.setCat(contactList.get(position).getCategory());
-        holder.setDescription(contactList.get(position).getDescription());
-        holder.setId(contactList.get(position).getId()+""+position);
+        holder.setName(series.get(position).getName());
+        //holder.setCat(series.get(position).getCategory());
+        holder.setDescription(series.get(position).getDescription());
+        holder.setId(series.get(position).getId()+""+position);
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return series.size();
     }
 
     public void addItem(Series n){
-        contactList.add(n);
-        notifyItemInserted(contactList.size()-1);
+        series.add(n);
+        notifyItemInserted(series.size()-1);
+    }
+
+    public void clear() {
+        series.clear();
+        notifyDataSetChanged();
     }
 
     public Series getSeries(int position) {
-        return contactList.get(position);
+        return series.get(position);
     }
 }

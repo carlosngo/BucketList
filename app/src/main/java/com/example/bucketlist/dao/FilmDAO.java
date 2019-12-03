@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MovieDAO implements DataAccessObject {
+public class FilmDAO implements DataAccessObject {
     public DatabaseReference getMovieReference(){
         return FirebaseDatabase.getInstance().getReference("categories").child("movies");
     }

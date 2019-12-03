@@ -5,7 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public final class Database {
     private static final BookDAO bookDAO= new BookDAO();
-    private static final MovieDAO movieDAO= new MovieDAO();
+    private static final FilmDAO movieDAO= new FilmDAO();
     private static final GameDAO gameDAO= new GameDAO();
     private static final SeriesDAO seriesDAO= new SeriesDAO();
     private static final GoalDAO goalDAO= new GoalDAO();
@@ -16,7 +16,7 @@ public final class Database {
         return bookDAO;
     }
 
-    public static MovieDAO getMovieDAO() {
+    public static FilmDAO getMovieDAO() {
         return movieDAO;
     }
 

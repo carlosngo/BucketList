@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalHolder>  {
 
-    private ArrayList<Goal> contactList;
+    private ArrayList<Goal> goals;
     private Activity context;
 
     public GoalAdapter(Activity activity){
         context = activity;
-        contactList = new ArrayList<Goal>();
+        goals = new ArrayList<Goal>();
     }
 
     @Override
@@ -33,23 +33,28 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalHolder>  {
 
     @Override
     public void onBindViewHolder(GoalHolder holder, final int position) {
-        holder.setName(contactList.get(position).getName());
-        //holder.setCat(contactList.get(position).getCategory());
-        holder.setDescription(contactList.get(position).getDescription());
-        holder.setId(contactList.get(position).getId()+""+position);
+        holder.setName(goals.get(position).getName());
+        //holder.setCat(goals.get(position).getCategory());
+        holder.setDescription(goals.get(position).getDescription());
+        holder.setId(goals.get(position).getId()+""+position);
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return goals.size();
     }
 
     public void addItem(Goal n){
-        contactList.add(n);
-        notifyItemInserted(contactList.size()-1);
+        goals.add(n);
+        notifyItemInserted(goals.size()-1);
+    }
+
+    public void clear() {
+        goals.clear();
+        notifyDataSetChanged();
     }
 
     public Goal getGoal(int position) {
-        return contactList.get(position);
+        return goals.get(position);
     }
 }

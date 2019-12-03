@@ -61,7 +61,7 @@ public class ManualAddActivity extends AppCompatActivity {
                     String newId;
                     switch (category) {
                         case "Films":
-                            MovieDAO movieDAO = Database.getMovieDAO();
+                            FilmDAO movieDAO = Database.getMovieDAO();
                             Movie movie = new Movie();
                             movie.setName(nameInput);
                             movie.setDescription(descriptionInput);

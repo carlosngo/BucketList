@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class FilmAdapter extends RecyclerView.Adapter<FilmHolder>  {
 
-    private ArrayList<Movie> contactList;
+    private ArrayList<Movie> films;
     private Activity context;
 
     public FilmAdapter(Activity activity){
         context = activity;
-        contactList = new ArrayList<Movie>();
+        films = new ArrayList<Movie>();
     }
 
     @Override
@@ -32,23 +32,28 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmHolder>  {
 
     @Override
     public void onBindViewHolder(FilmHolder holder, final int position) {
-        holder.setName(contactList.get(position).getName());
-        //holder.setCat(contactList.get(position).getCategory());
-        holder.setDescription(contactList.get(position).getDescription());
-        holder.setId(contactList.get(position).getId()+""+position);
+        holder.setName(films.get(position).getName());
+        //holder.setCat(films.get(position).getCategory());
+        holder.setDescription(films.get(position).getDescription());
+        holder.setId(films.get(position).getId()+""+position);
     }
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return films.size();
     }
 
     public void addItem(Movie n){
-        contactList.add(n);
-        notifyItemInserted(contactList.size()-1);
+        films.add(n);
+        notifyItemInserted(films.size()-1);
+    }
+
+    public void clear() {
+        films.clear();
+        notifyDataSetChanged();
     }
 
     public Movie getFilm(int position) {
-        return contactList.get(position);
+        return films.get(position);
     }
 }

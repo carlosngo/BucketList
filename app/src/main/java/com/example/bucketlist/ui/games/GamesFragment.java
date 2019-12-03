@@ -1,5 +1,6 @@
 package com.example.bucketlist.ui.games;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +17,28 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucketlist.dao.Database;
+import com.example.bucketlist.dao.GameDAO;
 import com.example.bucketlist.model.Game;
 import com.example.bucketlist.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class GamesFragment extends Fragment {
 
+    RecyclerView listGames;
+    GameAdapter gameAdapter;
+
+    DatabaseReference gameReference;
+    DatabaseReference userGameReference;
+    ValueEventListener gameChangeListener;
+
+    GameDAO gameDAO;
     private GamesViewModel gamesViewModel;
     private View root;
     private RecyclerView recyclerArea;
@@ -31,6 +46,8 @@ public class GamesFragment extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Game> notes;
     private TextView blankMessage;
+
+    private String userId;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,25 +63,70 @@ public class GamesFragment extends Fragment {
             }
         });
 
-        notes = new ArrayList<>();
-        notes.add(new Game("firebase push id","Rock paper scissors online", "Filipino game"));
-        notes.add(new Game("firebase push id","Tumbang preso online", "Filipino game"));
-
+        listGames = root.findViewById(R.id.listGames);
+        listGames.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
         blankMessage = root.findViewById(R.id.blankMessage);
-        if(notes.size()==0){
-            blankMessage.setVisibility(View.VISIBLE);
-        }
-        else{
-            blankMessage.setVisibility(View.GONE);
-            recyclerArea = root.findViewById(R.id.recycler_area);
-            manager = new LinearLayoutManager(getContext());
-            recyclerArea.setLayoutManager(manager);
-            adapter = new GameAdapter(getActivity());
-            recyclerArea.setAdapter(adapter);
-            for(Game n: notes){
-                adapter.addItem(n);
+
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        gameDAO = Database.getGameDAO();
+        gameReference = gameDAO.getGameReference();
+        userGameReference = gameDAO.getGameUnderUserReference(userId);
+        gameAdapter = new GameAdapter(getActivity());
+        listGames.setAdapter(gameAdapter);
+
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                Toast.makeText(getActivity(), "on Move", Toast.LENGTH_SHORT).show();
+                return false;
             }
-        }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+                int position = viewHolder.getAdapterPosition();
+                String bookId = gameAdapter.getGame(position).getId();
+                gameDAO.delete(userId, bookId);
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(listGames);
+
+        gameChangeListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                gameAdapter.clear();
+
+                listGames.setAdapter(gameAdapter);
+                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+                    String bookId = bookSnap.getKey();
+                    gameReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            gameAdapter.addItem(dataSnapshot.getValue(Game.class));
+                            blankMessage.setVisibility(View.INVISIBLE);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        userGameReference.addValueEventListener(gameChangeListener);
         return root;
     }
 }
