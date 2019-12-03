@@ -6,19 +6,26 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Book extends Note {
     private String id;
-    private String category;
+//    private String category;
     private String name;
     private String author;
 
     public Book() {}
 
-    public Book(String id, String name, String category, String author) {
-        super(id, name, category, author);
-        this.id = id;
-        this.category = category;
-        this.name = name;
+    public Book(String cid, String cname, String author){
+        super(cid, cname, author);
+        id = cid;
+        name = cname;
         this.author = author;
     }
+
+//    public Book(String id, String name, String category, String author) {
+//        super(id, name, category, author);
+//        this.id = id;
+//        this.category = category;
+//        this.name = name;
+//        this.author = author;
+//    }
 
     public String getAuthor() {
         return author;
@@ -36,13 +43,13 @@ public class Book extends Note {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
 
     public String getDescription() {
         return author;

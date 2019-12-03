@@ -35,16 +35,16 @@ public class ViewAllActivity extends AppCompatActivity {
         backBtn = (Button) findViewById(R.id.backBtn);
 
         notes = new ArrayList<>();
-        notes.add(new Book("firebase push id","Swan trumpet", "BOOK", "E.B. White"));
-        notes.add(new Book("firebase push id","Charlotte's web", "BOOK", "M. S."));
-        notes.add(new Goal("firebase push id","Read book", "GOAL", "read at least 1 book"));
-        notes.add(new Goal("firebase push id","Get thin", "GOAL", "lose 300 pounds"));
-        notes.add(new Series("firebase push id","One Piece", "SERIES", "Japanese Series"));
-        notes.add(new Series("firebase push id","Probinsyano", "SERIES", "Filipino Series"));
-        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
-        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
-        notes.add(new Game("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
-        notes.add(new Game("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
+        notes.add(new Book("firebase push id","Swan trumpet", "E.B. White"));
+        notes.add(new Book("firebase push id","Charlotte's web",  "M. S."));
+        notes.add(new Goal("firebase push id","Read book", "read at least 1 book"));
+        notes.add(new Goal("firebase push id","Get thin", "lose 300 pounds"));
+        notes.add(new Series("firebase push id","One Piece", "Japanese Series"));
+        notes.add(new Series("firebase push id","Probinsyano", "Filipino Series"));
+        notes.add(new Movie("firebase push id","Kimi no nawa", "anime"));
+        notes.add(new Movie("firebase push id","Blank man the movie", "Blank villain tries to take over the world, and gets whacked by blank man"));
+        notes.add(new Game("firebase push id","Rock paper scissors online", "Filipino game"));
+        notes.add(new Game("firebase push id","Tumbang preso online", "Filipino game"));
 
         if(notes.size()==0){
             blankMessage = findViewById(R.id.blankMessage);

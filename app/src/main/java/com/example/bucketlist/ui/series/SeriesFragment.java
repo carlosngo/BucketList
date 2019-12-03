@@ -56,8 +56,8 @@ public class SeriesFragment extends Fragment {
         });
 
         notes = new ArrayList<>();
-        notes.add(new Series("firebase push id","One Piece", "SERIES", "Japanese Series"));
-        notes.add(new Series("firebase push id","Probinsyano", "SERIES", "Filipino Series"));
+        notes.add(new Series("firebase push id","One Piece", "Japanese Series"));
+        notes.add(new Series("firebase push id","Probinsyano", "Filipino Series"));
 
         blankMessage = root.findViewById(R.id.blankMessage);
         if(notes.size()==0){

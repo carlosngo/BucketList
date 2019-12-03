@@ -5,19 +5,26 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Series extends Note {
     private String id;
-    private String category;
+//    private String category;
     private String name;
     private String description;
 
     public Series() { }
 
-    public Series(String cid, String cname,String cat, String des){
-        super(cid, cname, cat, des);
+    public Series(String cid, String cname, String des){
+        super(cid, cname, des);
         id = cid;
         name = cname;
-        category = cat;
         description = des;
     }
+
+//    public Series(String cid, String cname,String cat, String des){
+//        super(cid, cname, cat, des);
+//        id = cid;
+//        name = cname;
+//        category = cat;
+//        description = des;
+//    }
 
     public String getName() {
         return name;
@@ -27,13 +34,13 @@ public class Series extends Note {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
 
     public String getDescription() {
         return description;

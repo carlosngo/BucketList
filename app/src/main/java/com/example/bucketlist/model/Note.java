@@ -4,18 +4,24 @@ package com.example.bucketlist.model;
 // setters were made using the Refactor -> Encapsulate fields feature of Android Studio
 public class Note {
     private String id;
-    private String category;
+//    private String category;
     private String name;
     private String description;
 
     public Note() {}
 
-    public Note(String cid, String cname,String cat, String des){
+    public Note(String cid, String cname, String des){
         id = cid;
         name = cname;
-        category = cat;
         description = des;
     }
+
+//    public Note(String cid, String cname,String cat, String des){
+//        id = cid;
+//        name = cname;
+//        category = cat;
+//        description = des;
+//    }
 
     public String getName() {
         return name;
@@ -25,13 +31,13 @@ public class Note {
         this.name = name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
 
     public String getDescription() {
         return description;

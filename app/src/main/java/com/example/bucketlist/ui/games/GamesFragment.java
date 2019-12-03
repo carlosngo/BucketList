@@ -47,8 +47,8 @@ public class GamesFragment extends Fragment {
         });
 
         notes = new ArrayList<>();
-        notes.add(new Game("firebase push id","Rock paper scissors online", "GAME", "Filipino game"));
-        notes.add(new Game("firebase push id","Tumbang preso online", "GAME", "Filipino game"));
+        notes.add(new Game("firebase push id","Rock paper scissors online", "Filipino game"));
+        notes.add(new Game("firebase push id","Tumbang preso online", "Filipino game"));
 
         blankMessage = root.findViewById(R.id.blankMessage);
         if(notes.size()==0){

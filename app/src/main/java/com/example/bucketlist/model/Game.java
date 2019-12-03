@@ -11,13 +11,20 @@ public class Game extends Note {
 
     public Game() { }
 
-    public Game(String cid, String cname,String cat, String des){
-        super(cid, cname, cat, des);
+    public Game(String cid, String cname, String des){
+        super(cid, cname, des);
         id = cid;
         name = cname;
-        category = cat;
         description = des;
     }
+
+//    public Game(String cid, String cname,String cat, String des){
+//        super(cid, cname, cat, des);
+//        id = cid;
+//        name = cname;
+//        category = cat;
+//        description = des;
+//    }
 
     public String getName() {
         return name;
