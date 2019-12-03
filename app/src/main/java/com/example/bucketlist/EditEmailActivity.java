@@ -14,12 +14,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EditEmailActivity extends AppCompatActivity {
 
     Button cancel, save;
     EditText emailInput;
     FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    String email;
     FrameLayout progressOverlay;
 
     @Override
@@ -35,7 +38,7 @@ public class EditEmailActivity extends AppCompatActivity {
     }
 
     public void save(View v){
-        String email = emailInput.getText().toString();
+        email = emailInput.getText().toString();
         if(email.length()==0){
             Toast.makeText(getApplicationContext(),"Please enter an email",Toast.LENGTH_SHORT).show();
         } else{
@@ -43,6 +46,14 @@ public class EditEmailActivity extends AppCompatActivity {
             mAuth.getCurrentUser().updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    try {
+                        database.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("email")
+                                .setValue(email);
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                    }
                     progressOverlay.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();

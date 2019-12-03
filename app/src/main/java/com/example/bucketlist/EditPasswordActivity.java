@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EditPasswordActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class EditPasswordActivity extends AppCompatActivity {
     EditText passwordInput;
     FirebaseAuth mAuth;
     FrameLayout progressOverlay;
+    FirebaseDatabase database;
     String pw;
     SharedPreferences pref;
 
@@ -44,6 +46,14 @@ public class EditPasswordActivity extends AppCompatActivity {
             mAuth.getCurrentUser().updatePassword(pw).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    try {
+                        database.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child("password")
+                                .setValue(pw);
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                    }
                     progressOverlay.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         SharedPreferences.Editor editor = pref.edit();
