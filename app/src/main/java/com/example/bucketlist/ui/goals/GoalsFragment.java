@@ -63,6 +63,7 @@ public class GoalsFragment extends Fragment {
             blankMessage.setVisibility(View.VISIBLE);
         }
         else{
+            blankMessage.setVisibility(View.GONE);
             recyclerArea = root.findViewById(R.id.recycler_area);
             manager = new LinearLayoutManager(getContext());
             recyclerArea.setLayoutManager(manager);

@@ -47,14 +47,15 @@ public class FilmsFragment extends Fragment {
         });
 
         notes = new ArrayList<>();
-        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
-        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
+//        notes.add(new Movie("firebase push id","Kimi no nawa", "FILM", "anime"));
+//        notes.add(new Movie("firebase push id","Blank man the movie", "FILM", "Blank villain tries to take over the world, and gets whacked by blank man"));
 
         if(notes.size()==0){
             blankMessage = root.findViewById(R.id.blankMessage);
             blankMessage.setVisibility(View.VISIBLE);
         }
         else{
+            blankMessage.setVisibility(View.GONE);
             recyclerArea = root.findViewById(R.id.recycler_area);
             manager = new LinearLayoutManager(getContext());
             recyclerArea.setLayoutManager(manager);
