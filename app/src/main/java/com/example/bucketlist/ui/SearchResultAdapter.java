@@ -43,21 +43,32 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultHolder
         holder.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String noteId = note.getId();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 if (note instanceof Movie) {
-                    Database.getMovieDAO().addMetadataUnderMovie(note.getId(), userId);
+                    FilmDAO movieDAO = Database.getMovieDAO();
+                    if (noteId.equals("")) noteId = movieDAO.add(note);
+                    movieDAO.addMetadataUnderMovie(noteId, userId);
                 }
                 else if (note instanceof Game) {
-                    Database.getGameDAO().addGameUnderUser(note.getId(), userId);
+                    GameDAO gameDAO = Database.getGameDAO();
+                    if (noteId.equals("")) noteId = gameDAO.add(note);
+                    gameDAO.addGameUnderUser(noteId, userId);
                 }
                 else if (note instanceof Book) {
-                    Database.getBookDAO().addBookUnderUser(note.getId(), userId);
+                    BookDAO bookDAO = Database.getBookDAO();
+                    if (noteId.equals("")) noteId = bookDAO.add(note);
+                    bookDAO.addBookUnderUser(noteId, userId);
                 }
                 else if (note instanceof Series) {
-                    Database.getSeriesDAO().addMetadataUnderSeries(note.getId(), userId);
+                    SeriesDAO seriesDAO = Database.getSeriesDAO();
+                    if (noteId.equals("")) noteId = seriesDAO.add(note);
+                    seriesDAO.addMetadataUnderSeries(noteId, userId);
                 }
                 else if (note instanceof Goal) {
-                    Database.getGoalDAO().addMetadataUnderGoal(note.getId(), userId);
+                    GoalDAO goalDAO = Database.getGoalDAO();
+                    if (noteId.equals("")) noteId = goalDAO.add(note);
+                    goalDAO.addMetadataUnderGoal(noteId, userId);
                 }
                 Toast.makeText(context.getApplicationContext(), "Added " + note.getName() + " in your bucket list.", Toast.LENGTH_SHORT).show();
             }

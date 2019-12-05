@@ -19,7 +19,7 @@ public class BookDAO implements DataAccessObject{
         DatabaseReference databaseBook = getBookReference();
         String id = databaseBook.push().getKey();
         book.setId(id);
-        databaseBook.child(id).setValue(book.getId());
+        databaseBook.child(id).setValue(book);
         return id;
     }
 
