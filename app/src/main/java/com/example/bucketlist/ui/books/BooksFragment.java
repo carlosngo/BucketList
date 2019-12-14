@@ -1,19 +1,15 @@
 package com.example.bucketlist.ui.books;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -24,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bucketlist.dao.*;
 import com.example.bucketlist.model.*;
 import com.example.bucketlist.R;
-import com.example.bucketlist.ui.ConfirmationPopup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,16 +46,10 @@ public class BooksFragment extends Fragment {
 
     private String userId;
 
-    ConfirmationPopup pop;
-    Context context;
-    ConstraintLayout constraintLayout;
-    Activity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        context = getActivity().getBaseContext();
 
-        activity = getActivity();
         booksViewModel =
                 ViewModelProviders.of(this).get(BooksViewModel.class);
 //        root = inflater.inflate(R.layout.fragment_notifications, container, false);
@@ -72,7 +61,7 @@ public class BooksFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        constraintLayout = root.findViewById(R.id.bookLayout);
+
         listBooks = root.findViewById(R.id.listBooks);
         listBooks.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
         blankMessage = root.findViewById(R.id.blankMessage);
@@ -95,7 +84,7 @@ public class BooksFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                pop.popup(context, constraintLayout, activity);
+
                 int position = viewHolder.getAdapterPosition();
                 String bookId = bookAdapter.getBook(position).getId();
                 bookDAO.delete(userId, bookId);

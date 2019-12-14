@@ -52,8 +52,6 @@ public class GoalsFragment extends Fragment {
 
     private String userId;
 
-
-
     public static GoalsFragment newInstance() {
         return new GoalsFragment();
     }
@@ -94,6 +92,7 @@ public class GoalsFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
                 int position = viewHolder.getAdapterPosition();
                 String bookId = goalAdapter.getGoal(position).getId();
                 goalDAO.delete(userId, bookId);
