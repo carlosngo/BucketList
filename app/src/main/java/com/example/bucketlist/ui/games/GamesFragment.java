@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,7 +65,10 @@ public class GamesFragment extends Fragment {
         });
 
         listGames = root.findViewById(R.id.listGames);
-        listGames.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+        listGames.setLayoutManager(layoutManager);
+        listGames.addItemDecoration(new DividerItemDecoration(listGames.getContext(),
+                layoutManager.getOrientation()));
         blankMessage = root.findViewById(R.id.blankMessage);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();

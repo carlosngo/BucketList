@@ -65,7 +65,8 @@ public class ManualAddActivity extends AppCompatActivity {
                             Movie movie = new Movie();
                             movie.setName(nameInput);
                             movie.setDescription(descriptionInput);
-                            movieDAO.add(movie);
+                            newId = movieDAO.add(movie);
+                            movieDAO.addMetadataUnderMovie(newId, userId);
                             break;
                         case "Books":
                             BookDAO bookDAO = Database.getBookDAO();

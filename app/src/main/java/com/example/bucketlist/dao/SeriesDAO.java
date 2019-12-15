@@ -28,10 +28,8 @@ public class SeriesDAO implements DataAccessObject {
 
     @Override
     public void delete(String userId, String id) {
-        DatabaseReference databaseBook = getSeriesReference().child(id);
-        databaseBook.removeValue();
         DatabaseReference databaseUsers = getSeriesUnderUserReference(userId);
-        databaseUsers.removeValue();
+        databaseUsers.child(id).removeValue();
     }
 
     @Override

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,7 +65,10 @@ public class FilmsFragment extends Fragment {
         });
 
         listFilms = root.findViewById(R.id.listFilms);
-        listFilms.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+        listFilms.setLayoutManager(layoutManager);
+        listFilms.addItemDecoration(new DividerItemDecoration(listFilms.getContext(),
+                layoutManager.getOrientation()));
         blankMessage = root.findViewById(R.id.blankMessage);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();

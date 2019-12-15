@@ -29,8 +29,6 @@ public class GoalDAO implements DataAccessObject {
 
     @Override
     public void delete(String userId, String id) {
-        DatabaseReference databaseBook = getGoalReference().child(id);
-        databaseBook.removeValue();
         DatabaseReference databaseUsers = getGoalUnderUserReference(userId);
         databaseUsers.child(id).removeValue();
     }

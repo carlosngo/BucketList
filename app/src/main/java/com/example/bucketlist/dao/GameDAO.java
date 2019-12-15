@@ -25,8 +25,6 @@ public class GameDAO implements DataAccessObject {
 
     @Override
     public void delete(String userId, String id) {
-        DatabaseReference databaseBook = getGameReference().child(id);
-        databaseBook.removeValue();
         DatabaseReference databaseUsers = getGameUnderUserReference(userId);
         databaseUsers.child(id).removeValue();
     }

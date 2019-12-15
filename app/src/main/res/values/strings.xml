@@ -2,11 +2,11 @@
     <string name="app_name">BucketList</string>
 
     <string name="title_home">Home</string>
-    <string name="title_films">Films</string>
-    <string name="title_books">Books</string>
-    <string name="title_games">Games</string>
-    <string name="title_series">Series</string>
-    <string name="title_goals">Others</string>
+    <string name="title_films">My Films</string>
+    <string name="title_books">My Books</string>
+    <string name="title_games">My Games</string>
+    <string name="title_series">My Series</string>
+    <string name="title_goals">My Goals</string>
 
     <string name="action_search">Search</string>
     <string name="action_viewAll">View All Items</string>

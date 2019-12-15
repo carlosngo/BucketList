@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +73,10 @@ public class GoalsFragment extends Fragment {
         });
 
         listGoals = root.findViewById(R.id.listGoals);
-        listGoals.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+        listGoals.setLayoutManager(layoutManager);
+        listGoals.addItemDecoration(new DividerItemDecoration(listGoals.getContext(),
+                layoutManager.getOrientation()));
         blankMessage = root.findViewById(R.id.blankMessage);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();

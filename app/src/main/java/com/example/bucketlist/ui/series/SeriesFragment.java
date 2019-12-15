@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,7 +74,10 @@ public class SeriesFragment extends Fragment {
         });
 
         listSeries = root.findViewById(R.id.listSeries);
-        listSeries.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
+        listSeries.setLayoutManager(layoutManager);
+        listSeries.addItemDecoration(new DividerItemDecoration(listSeries.getContext(),
+                layoutManager.getOrientation()));
         blankMessage = root.findViewById(R.id.blankMessage);
 
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
