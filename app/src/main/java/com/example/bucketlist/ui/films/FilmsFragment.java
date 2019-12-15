@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class FilmsFragment extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Movie> notes;
     private TextView blankMessage;
+    private ProgressBar loader;
 
     private String userId;
 
@@ -63,6 +65,7 @@ public class FilmsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        loader = root.findViewById(R.id.loader);
 
         listFilms = root.findViewById(R.id.listFilms);
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -105,23 +108,30 @@ public class FilmsFragment extends Fragment {
         filmChangeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loader.setVisibility(View.VISIBLE);
+                blankMessage.setVisibility(View.GONE);
                 filmAdapter.clear();
 
                 listFilms.setAdapter(filmAdapter);
-                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
-                    String bookId = bookSnap.getKey();
-                    filmReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            filmAdapter.addItem(dataSnapshot.getValue(Movie.class));
-                            blankMessage.setVisibility(View.INVISIBLE);
-                        }
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    loader.setVisibility(View.GONE);
+                    blankMessage.setVisibility(View.VISIBLE);
+                } else {
+                    for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+                        String bookId = bookSnap.getKey();
+                        filmReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                loader.setVisibility(View.GONE);
+                                filmAdapter.addItem(dataSnapshot.getValue(Movie.class));
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
 

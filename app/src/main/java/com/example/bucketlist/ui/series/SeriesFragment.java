@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class SeriesFragment extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Series> notes;
     private TextView blankMessage;
+    private ProgressBar loader;
 
     private String userId;
 
@@ -72,6 +74,7 @@ public class SeriesFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        loader = root.findViewById(R.id.loader);
 
         listSeries = root.findViewById(R.id.listSeries);
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -114,23 +117,30 @@ public class SeriesFragment extends Fragment {
         seriesChangeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loader.setVisibility(View.VISIBLE);
+                blankMessage.setVisibility(View.GONE);
                 seriesAdapter.clear();
 
                 listSeries.setAdapter(seriesAdapter);
-                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
-                    String bookId = bookSnap.getKey();
-                    seriesReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            seriesAdapter.addItem(dataSnapshot.getValue(Series.class));
-                            blankMessage.setVisibility(View.INVISIBLE);
-                        }
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    loader.setVisibility(View.GONE);
+                    blankMessage.setVisibility(View.VISIBLE);
+                } else {
+                    for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+                        String bookId = bookSnap.getKey();
+                        seriesReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                loader.setVisibility(View.GONE);
+                                seriesAdapter.addItem(dataSnapshot.getValue(Series.class));
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
 

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class GoalsFragment extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Goal> notes;
     private TextView blankMessage;
+    private ProgressBar loader;
 
     private String userId;
 
@@ -71,6 +73,7 @@ public class GoalsFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        loader = root.findViewById(R.id.loader);
 
         listGoals = root.findViewById(R.id.listGoals);
         LinearLayoutManager layoutManager = new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -113,23 +116,30 @@ public class GoalsFragment extends Fragment {
         goalChangeListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loader.setVisibility(View.VISIBLE);
+                blankMessage.setVisibility(View.GONE);
                 goalAdapter.clear();
 
                 listGoals.setAdapter(goalAdapter);
-                for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
-                    String bookId = bookSnap.getKey();
-                    goalReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            goalAdapter.addItem(dataSnapshot.getValue(Goal.class));
-                            blankMessage.setVisibility(View.INVISIBLE);
-                        }
+                if (dataSnapshot.getChildrenCount() == 0) {
+                    loader.setVisibility(View.GONE);
+                    blankMessage.setVisibility(View.VISIBLE);
+                } else {
+                    for (DataSnapshot bookSnap : dataSnapshot.getChildren()) {
+                        String bookId = bookSnap.getKey();
+                        goalReference.child(bookId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                loader.setVisibility(View.GONE);
+                                goalAdapter.addItem(dataSnapshot.getValue(Goal.class));
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
             }
 
