@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     private SearchResultAdapter rawgAdapter;
     private SearchResultAdapter gbooksAdapter;
 
+    private ProgressBar usersLoader;
+    private ProgressBar imdbLoader;
+    private ProgressBar rawgLoader;
+    private ProgressBar gbooksLoader;
 
     private TextView txtQuery;
     private String query;
@@ -65,21 +70,30 @@ public class SearchResultsActivity extends AppCompatActivity {
         recyclerArea.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SearchResultAdapter(this);
         recyclerArea.setAdapter(adapter);
+        recyclerArea.setNestedScrollingEnabled(false);
 
         imdbRecycler = findViewById(R.id.imdb_recycler);
         imdbRecycler.setLayoutManager(new LinearLayoutManager(this));
         imdbAdapter = new SearchResultAdapter(this);
         imdbRecycler.setAdapter(imdbAdapter);
+        imdbRecycler.setNestedScrollingEnabled(false);
 
         rawgRecycler = findViewById(R.id.rawg_recycler);
         rawgRecycler.setLayoutManager(new LinearLayoutManager(this));
         rawgAdapter = new SearchResultAdapter(this);
         rawgRecycler.setAdapter(rawgAdapter);
+        rawgRecycler.setNestedScrollingEnabled(false);
 
         gbooksRecycler = findViewById(R.id.gbooks_recycler);
         gbooksRecycler.setLayoutManager(new LinearLayoutManager(this));
         gbooksAdapter = new SearchResultAdapter(this);
         gbooksRecycler.setAdapter(gbooksAdapter);
+        gbooksRecycler.setNestedScrollingEnabled(false);
+
+        usersLoader = findViewById(R.id.usersLoader);
+        imdbLoader = findViewById(R.id.imdbLoader);
+        rawgLoader = findViewById(R.id.rawgLoader);
+        gbooksLoader = findViewById(R.id.gbooksLoader);
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             databaseReference = Database.getDatabaseReference();
@@ -89,6 +103,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int results = 0;
                     for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
                         String category = categorySnapshot.getKey();
                         for (DataSnapshot noteSnapshot : categorySnapshot.getChildren()) {
@@ -112,10 +127,14 @@ public class SearchResultsActivity extends AppCompatActivity {
                                         adapter.addItem(noteSnapshot.getValue(Goal.class));
                                         break;
                                 }
+                                results++;
                             }
                         }
 
                     }
+                    if (results == 0) findViewById(R.id.blankMessage).setVisibility(View.VISIBLE);
+                    usersLoader.setVisibility(View.GONE);
+
                 }
 
                 @Override
@@ -148,26 +167,6 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
         }
     }
-
-    class firebaseSearchTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
-
 
     class omdbSearchTask extends AsyncTask<String, Void, String> {
 
@@ -208,6 +207,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                         imdbAdapter.addItem(new Series("", title, description));
                     }
                 }
+                imdbLoader.setVisibility(View.GONE);
             } catch (JSONException e) {
 
             }
@@ -246,6 +246,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     String description = game.getString("released").substring(0, 4);
                     rawgAdapter.addItem(new Game("", name, description));
                 }
+                rawgLoader.setVisibility(View.GONE);
             } catch (JSONException e) {
 
             }
@@ -285,6 +286,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     else description = "No author(s) provided.";
                     gbooksAdapter.addItem(new Book("", title, description));
                 }
+                gbooksLoader.setVisibility(View.GONE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
