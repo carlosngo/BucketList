@@ -12,6 +12,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends AppCompatActivity {
     private EditText email, pwd;
     private Button loginBtn, registerBtn;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 password = pwd.getText().toString();
                 if(emailAddress.length()>0 && password.length()>0){
                     progressOverlay.setVisibility(View.VISIBLE);
-                    mAuth.signInWithEmailAndPassword(emailAddress, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(emailAddress, generateHash(password)).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressOverlay.setVisibility(View.GONE);
@@ -85,4 +88,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public String generateHash(String input) {
+        StringBuilder hash = new StringBuilder();
+
+        try {
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            byte[] hashedBytes = sha.digest(input.getBytes());
+            char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                    'a', 'b', 'c', 'd', 'e', 'f' };
+            for (int idx = 0; idx < hashedBytes.length; ++idx) {
+                byte b = hashedBytes[idx];
+                hash.append(digits[(b & 0xf0) >> 4]);
+                hash.append(digits[b & 0x0f]);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            Toast.makeText(getApplicationContext(),"NoSuchAlgorithmException",Toast.LENGTH_SHORT).show();
+        }
+
+        return hash.toString();
+    }
 }

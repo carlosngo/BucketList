@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class EditPasswordActivity extends AppCompatActivity {
 
     Button cancel, save;
@@ -43,19 +46,19 @@ public class EditPasswordActivity extends AppCompatActivity {
         pw = passwordInput.getText().toString();
         if(pw.length()>=6){
             progressOverlay.setVisibility(View.VISIBLE);
-            mAuth.getCurrentUser().updatePassword(pw).addOnCompleteListener(new OnCompleteListener<Void>() {
+            mAuth.getCurrentUser().updatePassword(generateHash(pw)).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    try {
-                        database.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .child("password")
-                                .setValue(pw);
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
-                    }
                     progressOverlay.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
+                        try {
+                            database.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("password")
+                                    .setValue(generateHash(pw));
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("password", pw);
                         editor.commit();
@@ -73,5 +76,25 @@ public class EditPasswordActivity extends AppCompatActivity {
 
     public void cancel(View v){
         finish();
+    }
+
+    public String generateHash(String input) {
+        StringBuilder hash = new StringBuilder();
+
+        try {
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            byte[] hashedBytes = sha.digest(input.getBytes());
+            char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                    'a', 'b', 'c', 'd', 'e', 'f' };
+            for (int idx = 0; idx < hashedBytes.length; ++idx) {
+                byte b = hashedBytes[idx];
+                hash.append(digits[(b & 0xf0) >> 4]);
+                hash.append(digits[b & 0x0f]);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            Toast.makeText(getApplicationContext(),"NoSuchAlgorithmException",Toast.LENGTH_SHORT).show();
+        }
+
+        return hash.toString();
     }
 }

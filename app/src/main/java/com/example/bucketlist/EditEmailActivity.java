@@ -46,16 +46,16 @@ public class EditEmailActivity extends AppCompatActivity {
             mAuth.getCurrentUser().updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    try {
-                        database.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .child("email")
-                                .setValue(email);
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
-                    }
                     progressOverlay.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
+                        try {
+                            database.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("email")
+                                    .setValue(email);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), ""+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
                         Toast.makeText(getApplicationContext(), "Update Successful.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {

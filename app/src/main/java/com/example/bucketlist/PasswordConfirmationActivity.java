@@ -19,6 +19,9 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class PasswordConfirmationActivity extends AppCompatActivity {
     Button editAccount, backBtn;
     EditText passwordInput;
@@ -47,7 +50,7 @@ public class PasswordConfirmationActivity extends AppCompatActivity {
             progressOverlay.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(),"Password is required",Toast.LENGTH_SHORT).show();
         } else {
-            AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(),pw);
+            AuthCredential credential = EmailAuthProvider.getCredential(mAuth.getCurrentUser().getEmail(),generateHash(pw));
             mAuth.getCurrentUser().reauthenticate(credential)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -63,7 +66,7 @@ public class PasswordConfirmationActivity extends AppCompatActivity {
                                 }
                                 finish();
                             } else {
-                                Toast.makeText(getApplicationContext(), "Invalid Password"+task.getException(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -71,6 +74,26 @@ public class PasswordConfirmationActivity extends AppCompatActivity {
     }
     public void cancel(View v){
         finish();
+    }
+
+    public String generateHash(String input) {
+        StringBuilder hash = new StringBuilder();
+
+        try {
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            byte[] hashedBytes = sha.digest(input.getBytes());
+            char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                    'a', 'b', 'c', 'd', 'e', 'f' };
+            for (int idx = 0; idx < hashedBytes.length; ++idx) {
+                byte b = hashedBytes[idx];
+                hash.append(digits[(b & 0xf0) >> 4]);
+                hash.append(digits[b & 0x0f]);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            Toast.makeText(getApplicationContext(),"NoSuchAlgorithmException",Toast.LENGTH_SHORT).show();
+        }
+
+        return hash.toString();
     }
 }
 
